@@ -4,9 +4,325 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
     <title>AhorrAdas</title>
 </head>
 <body>
+    <!-- ----------HEADER---------- -->
+    <header>
+        <article>
+            <nav>
+                <div>
+                    <h1>AhorrADAs</h1>
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
+                <div>
+                    <i class="fa-thin fa-bars"></i>
+                </div>
+            </nav>
+        </article>
+        <article>
+            <nav>
+                <a href="">
+                    <i class="fa-sharp fa-solid fa-chart-line-up"></i>
+                    Balance
+                </a>
+                <a href="">
+                    <i class="fa-sharp fa-solid fa-tag"></i>
+                    Categorías
+                </a>
+                <a href="">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    Reportes
+                </a>
+            </nav>
+        </article>
+    </header>
+    <!-- ------------MAIN--------------- -->
+    <main>
+        <section>
+            <article>
+                <h2>Balance</h2>
+            </article>
+            <article>
+                <div>
+                    <p>Ganancias</p>
+                </div>
+                <div>+$0</div>
+            </article>
+            <article>
+                <div>
+                    <p>Gastos</p>
+                </div>
+                <div>-$0</div>
+            </article>
+            <article>
+                <div>
+                   <p>Total</p> 
+                </div>
+                <div>$0</div>
+            </article>
+        </section>
+        <!-- ----------OPERATIONES---------- -->
+        <section>
+           <article>
+            <article>
+                <h2>Operaciones</h2>
+            </article>
+            <article>
+                <button>+ Nueva operacion</button>
+            </article>
+            <!-- NO OPERATIONS -->
+            <article>
+                <figure>
+                    <img src="" alt="">
+                </figure>
+                <h3>Sin resultados</h3>
+                <p>Cambia los filtros o agrega operaciones</p>
+            </article>
+           </article>
+           <!-- WITH OPERATIONS -->
+           <article>
+            <article>
+            
+            </article>
+
+           </article>
+        </section>
+        <!-- ----------FILTERS---------- -->
+        <section>
+            <article>
+                <div>
+                    <h2>Filtros</h2>
+                </div>
+                <div>
+                    <button>Ocultar filtros</button>
+                    <button>Mostrar filtros</button>
+                </div>
+            </article>
+                <article>
+                    <label for=""></label>
+                    <select name="" id="">
+                        <option value="">Todos</option>
+                        <option value="">Gastos</option>
+                        <option value="">Ganancias</option>
+                    </select>
+                </article>
+                <article>
+                    <label for="">Categoría</label>
+                    <select name="" id="">
+                        <option value="">Todos</option>
+                        <option value="">Comida</option>
+                        <option value="">Servicios</option>
+                        <option value="">Salidas</option>
+                        <option value="">Educación</option>
+                        <option value="">Transporte</option>
+                        <option value="">Trabajo</option>
+                    </select>
+                </article>
+                <article>
+                    <label for="">Desde</label>
+                    <input type="date" name="" id="">
+                </article>
+                <article>
+                    <label for="">Ordenar por</label>
+                    <select name="" id="">
+                        <option value="">Más reciente</option>
+                        <option value="">Menos reciente</option>
+                        <option value="">Mayor monto</option>
+                        <option value="">Menor monto</option>
+                        <option value="">A/Z</option>
+                        <option value="">Z/A</option>
+                    </select>
+                </article>
+            <article>
+
+            </article>
+        </section>
+        <!-- ------------NEW OPERATION--------------- -->
+        <section>
+            <article>
+                <div>
+                    <h2>Nueva operación</h2>
+                </div>
+            </article>
+            <article>
+                <label for="">Descripción</label>
+                <input type="text" name="" id="">
+            </article>
+            <article>
+                <label for="">Monto</label>
+                <input type="number" name="" id="">
+            </article>
+            <article>
+                <label for="">Tipo</label>
+                <select name="" id="">
+                    <option value="">GASTO</option>
+                    <option value="">GANANCIA</option>
+                </select>
+            </article>
+            <article>
+                <label for="">Categoría</label>
+                <select name="" id="">
+                    <option value="">Comida</option>
+                    <option value="">Servicios</option>
+                    <option value="">Salidas</option>
+                    <option value="">Educación</option>
+                    <option value="">Transporte</option>
+                    <option value="">Trabajo</option> 
+                </select>
+            </article>
+            <article>
+                <label for="">Desde</label>
+                <input type="date" name="" id="">
+            </article>
+            <article>
+                <button>Cancelar</button>
+                <button>Agregar</button>
+            </article>
+        </section>
+        <!-- ----------CATEGORIES---------- -->
+        <section>
+            <article>
+                <h2>Categorías</h2>
+            </article>
+            <article>
+                <label for="">Nombre</label>
+                <div>
+                    <input type="text" name="" id="">
+                    <button>Agregar</button>
+                </div>
+            </article>
+            <article>
+                <table>
+                    <tr>
+                        <td>Comida</td>
+                        <td>
+                            <button>Editar</button>
+                        </td>
+                        <td>
+                            <button>Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Servicios</td>
+                        <td>
+                            <button>Editar</button>
+                        </td>
+                        <td>
+                            <button>Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Salidas</td>
+                        <td>
+                            <button>Editar</button>
+                        </td>
+                        <td>
+                            <button>Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Educación</td>
+                        <td>
+                            <button>Editar</button>
+                        </td>
+                        <td>
+                            <button>Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Transporte</td>
+                        <td>
+                            <button>Editar</button>
+                        </td>
+                        <td>
+                            <button>Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Trabajo</td>
+                        <td>
+                            <button>Editar</button>
+                        </td>
+                        <td>
+                            <button>Eliminar</button>
+                        </td>
+                    </tr>
+                </table>
+            </article>
+        </section>
+        <!-- ----------REPORTS---------- -->
+        <section>
+            <article>
+                <article>
+                    <h2>Reportes</h2>
+                </article>
+                <!-- NO REPORTS -->
+                <article>
+                    <figure>
+                        <img src="" alt="">
+                    </figure>
+                    <h3>Operaciones insuficientes</h3>
+                    <p>Prueba agregando más operaciones</p>
+                </article>
+                <!-- WITH REPORTS -->
+                <article>
+                    <article>
+                        <h3>Resumen</h3>
+                    </article>
+                    <article>
+                        <table>
+                            <tr>
+                                <td>Categoría con mayor ganancia</td>                            
+                            </tr>
+                            <tr>
+                                <td>Categoría con mayor gasto</td>
+                            </tr>
+                            <tr>
+                                <td>Categoría con mayor balance</td>
+                            </tr>
+                            <tr>
+                                <td>Mes con mayor ganancia</td>
+                            </tr>
+                            <tr>
+                                <td>Mes con mayor gasto</td>
+                            </tr>
+                        </table>
+                    </article>
+                    <article>
+                       <h3>Totales por categorías</h3>
+                    </article>
+                    <article>
+                        <table>
+                            <tr>
+                                <td>Categoría</td>
+                                <td>Ganancia</td>
+                                <td>Gasto</td>
+                                <td>Balance</td>
+                            </tr>
+                        </table>
+                    </article>
+                    <article>
+                       <h3>Totales por mes</h3>
+                    </article>
+                    <article>
+                        <table>
+                            <tr>
+                                <td>Mes</td>
+                                <td>Ganancia</td>
+                                <td>Gasto</td>
+                                <td>Balance</td>
+                            </tr>
+                        </table>
+                    </article>
+                </article>
+            </article>
+        </section>
+
+    </main>
     
 </body>
 </html>
