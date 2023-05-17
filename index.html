@@ -4,37 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- link font-awesome -->
+    <!-- font-awesome link-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <!-- Tailwind link -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <title>AhorrAdas</title>
 </head>
-<body>
+<body class="bg-neutral-900 text-white">
     <!-- ----------HEADER---------- -->
-    <header>
+    <header class="bg-orange-700">
         <article>
-            <nav>
-                <div>
-                    <h1>AhorrADAs</h1>
-                    <i class="fa-solid fa-wallet"></i>
+            <nav class="flex justify-between">
+                <div class="flex py-2.5 px-1.5">
+                    <i class="fa-solid fa-wallet text-4xl px-2"></i>
+                    <h1 class="text-4xl font-sans">AhorrADAs</h1>
                 </div>
-                <div>
-                    <i class="fa-thin fa-bars"></i>
+                <div class="py-3.5 px-1.5">
+                    <i class="fa-solid fa-ellipsis-vertical text-2xl"></i>
                 </div>
             </nav>
         </article>
-        <article>
-            <nav>
-                <a href="">
-                    <i class="fa-sharp fa-solid fa-chart-line-up"></i>
+        <article class="bg-neutral-700  h-36 py-2.5 px-1.5 hidden" >
+            <nav class=" flex flex-col">
+                <a href="" class="py-1.5 px-1.5 font-sans ">
+                    <i class="fa-solid fa-chart-simple "></i>
                     Balance
                 </a>
-                <a href="">
-                    <i class="fa-sharp fa-solid fa-tag"></i>
+                <a href="" class="py-2.5 px-1.5 font-sans ">
+                    <i class="fa-sharp fa-solid fa-tag "></i>
                     Categorías
                 </a>
-                <a href="">
-                    <i class="fa-solid fa-chart-pie"></i>
+                <a href="" class="py-2.5 px-1.5 font-sans ">
+                    <i class="fa-solid fa-chart-pie "></i>
                     Reportes
                 </a>
             </nav>
@@ -42,47 +44,55 @@
     </header>
     <!-- ------------MAIN--------------- -->
     <main>
-        <section>
+        <section class="bg-neutral-700 w-10/12 mx-auto mt-14 p-3.5 rounded-md">
             <article>
-                <h2>Balance</h2>
-            </article>
-            <article>
-                <div>
-                    <p>Ganancias</p>
-                </div>
-                <div>+$0</div>
-            </article>
-            <article>
-                <div>
-                    <p>Gastos</p>
-                </div>
-                <div>-$0</div>
-            </article>
-            <article>
-                <div>
-                   <p>Total</p> 
-                </div>
-                <div>$0</div>
+                <article>
+                    <h2 class="text-3xl text-white font-bold m-3.5">Balance</h2>
+                </article>
+                <article class="flex justify-between">
+                    <div class="m-3.5">
+                        <p class="text-white">Ganancias</p>
+                    </div>
+                    <div class="m-3.5">
+                        <p class="text-white">+$0</p>
+                    </div>
+                </article>
+                <article class="flex justify-between">
+                    <div class="m-3.5">
+                        <p class="text-white">Gastos</p>
+                    </div>
+                    <div class="m-3.5">
+                        <p class="text-white">-$0</p>
+                    </div>
+                </article>
+                <article class="flex justify-between">
+                    <div class="m-3.5">
+                    <p class="text-white text-xl">Total</p> 
+                    </div>
+                    <div class="m-3.5">
+                        <p class="text-white">$0</p>
+                    </div>
+                </article>
             </article>
         </section>
         <!-- ----------OPERATIONES---------- -->
-        <section>
+        <section class="bg-neutral-700 w-10/12 mx-auto mt-14 p-3.5 rounded-md">
            <article>
-            <article>
-                <h2>Operaciones</h2>
-            </article>
-            <article>
-                <button>+ Nueva operacion</button>
+                <article>
+                    <h2 class="text-3xl font-bold m-3.5">Operaciones</h2>
+                </article>
+                <article>
+                    <button class="bg-orange-700 m-3.5 p-3 rounded-md">+ Nueva operacion</button>
+                </article>
             </article>
             <!-- NO OPERATIONS -->
             <article>
-                <figure>
-                    <img src="" alt="">
+                <figure class="m-3.5">
+                    <img src="img/e-wallet-6368676.svg" alt="Billetera virtual">
                 </figure>
-                <h3>Sin resultados</h3>
-                <p>Cambia los filtros o agrega operaciones</p>
+                <h3 class="text-center my-6">Sin resultados</h3>
+                <p class="text-center my-6">Cambia los filtros o agrega operaciones</p>
             </article>
-           </article>
            <!-- WITH OPERATIONS -->
            <article>
             <article>
@@ -92,27 +102,27 @@
            </article>
         </section>
         <!-- ----------FILTERS---------- -->
-        <section>
-            <article>
+        <section class="bg-neutral-700 w-10/12 mx-auto mt-14 p-3.5 rounded-md">
+            <article class="flex justify-between">
                 <div>
-                    <h2>Filtros</h2>
+                    <h2 class="text-3xl font-bold m-3.5">Filtros</h2>
                 </div>
                 <div>
-                    <button>Ocultar filtros</button>
-                    <button>Mostrar filtros</button>
+                    <button class="m-6">Ocultar filtros</button>
+                    <button class="hidden">Mostrar filtros</button>
                 </div>
             </article>
-                <article>
-                    <label for=""></label>
-                    <select name="" id="">
+                <article class="flex flex-col m-3.5">
+                    <label for="" class="my-2.5">Tipo</label>
+                    <select name="" id="" class="text-zinc-700 p-1.5 rounded">
                         <option value="">Todos</option>
                         <option value="">Gastos</option>
                         <option value="">Ganancias</option>
                     </select>
                 </article>
-                <article>
-                    <label for="">Categoría</label>
-                    <select name="" id="">
+                <article class="flex flex-col m-3.5">
+                    <label for="" class="my-2.5">Categoría</label>
+                    <select name="" id="" class="text-zinc-700 p-1.5 rounded">
                         <option value="">Todos</option>
                         <option value="">Comida</option>
                         <option value="">Servicios</option>
@@ -122,13 +132,13 @@
                         <option value="">Trabajo</option>
                     </select>
                 </article>
-                <article>
-                    <label for="">Desde</label>
-                    <input type="date" name="" id="">
+                <article class="flex flex-col m-3.5">
+                    <label for="" class="my-2.5">Desde</label>
+                    <input type="date" name="" id="" class="text-zinc-700 p-1.5 rounded">
                 </article>
-                <article>
-                    <label for="">Ordenar por</label>
-                    <select name="" id="">
+                <article class="flex flex-col m-3.5">
+                    <label for="" class="my-2.5">Ordenar por</label>
+                    <select name="" id="" class="text-zinc-700 p-1.5 rounded">
                         <option value="">Más reciente</option>
                         <option value="">Menos reciente</option>
                         <option value="">Mayor monto</option>
@@ -142,30 +152,30 @@
             </article>
         </section>
         <!-- ------------NEW OPERATION--------------- -->
-        <section>
+        <section class="bg-neutral-700 w-10/12 mx-auto mt-14 p-3.5 rounded-md hidden">
             <article>
                 <div>
-                    <h2>Nueva operación</h2>
+                    <h2 class="text-3xl font-bold m-3.5">Nueva operación</h2>
                 </div>
             </article>
-            <article>
-                <label for="">Descripción</label>
-                <input type="text" name="" id="">
+            <article class="flex flex-col m-3.5">
+                <label for="" class="my-2.5">Descripción</label>
+                <input type="text" name="" id="" class="text-zinc-700 p-1.5 rounded">
             </article>
-            <article>
-                <label for="">Monto</label>
-                <input type="number" name="" id="">
+            <article class="flex flex-col m-3.5">
+                <label for="" class="my-2.5">Monto</label>
+                <input type="number" name="" id="" class="text-zinc-700 p-1.5 rounded">
             </article>
-            <article>
-                <label for="">Tipo</label>
-                <select name="" id="">
+            <article class="flex flex-col m-3.5">
+                <label for="" class="my-2.5">Tipo</label>
+                <select name="" id="" class="text-zinc-700 p-1.5 rounded">
                     <option value="">GASTO</option>
                     <option value="">GANANCIA</option>
                 </select>
             </article>
-            <article>
-                <label for="">Categoría</label>
-                <select name="" id="">
+            <article class="flex flex-col m-3.5">
+                <label for="" class="my-2.5">Categoría</label>
+                <select name="" id="" class="text-zinc-700 p-1.5 rounded">
                     <option value="">Comida</option>
                     <option value="">Servicios</option>
                     <option value="">Salidas</option>
@@ -174,109 +184,112 @@
                     <option value="">Trabajo</option> 
                 </select>
             </article>
-            <article>
-                <label for="">Desde</label>
-                <input type="date" name="" id="">
+            <article class="flex flex-col m-3.5">
+                <label for="" class="my-2.5">Desde</label>
+                <input type="date" name="" id="" class="text-zinc-700 p-1.5 rounded">
             </article>
-            <article>
-                <button>Cancelar</button>
-                <button>Agregar</button>
+            <article class="flex justify-end m-3.5">
+                <button class="py-2 px-3 mr-1.5 rounded-md">Cancelar</button>
+                <button class="bg-orange-700 py-2 px-4  rounded-md">Agregar</button>
             </article>
         </section>
         <!-- ----------CATEGORIES---------- -->
-        <section>
+        <section class="bg-neutral-700 w-10/12 mx-auto mt-14 p-3.5 rounded-md hidden">
             <article>
-                <h2>Categorías</h2>
+                <h2 class="text-3xl font-bold m-3.5">Categorías</h2>
             </article>
-            <article>
-                <label for="">Nombre</label>
-                <div>
-                    <input type="text" name="" id="">
-                    <button>Agregar</button>
+            <article class="m-3.5">
+                <label for="" class="my-2.5">Nombre</label>
+                <div class="flex ">
+                    <input type="text" name="" id="" class="text-zinc-700 w-4/5 p-1.5 rounded">
+                    <button class="bg-orange-700 py-1 px-2 mx-1.5 rounded-md">Agregar</button>
                 </div>
             </article>
             <article>
-                <table>
+                <table class="w-full m-3.5 h-screen">
                     <tr>
                         <td>Comida</td>
                         <td>
-                            <button>Editar</button>
+                            <button class="text-xs">Editar</button>
                         </td>
                         <td>
-                            <button>Eliminar</button>
+                            <button class="text-xs">Eliminar</button>
                         </td>
                     </tr>
                     <tr>
                         <td>Servicios</td>
                         <td>
-                            <button>Editar</button>
+                            <button class="text-xs">Editar</button>
                         </td>
                         <td>
-                            <button>Eliminar</button>
+                            <button class="text-xs">Eliminar</button>
                         </td>
                     </tr>
                     <tr>
                         <td>Salidas</td>
                         <td>
-                            <button>Editar</button>
+                            <button class="text-xs">Editar</button>
                         </td>
                         <td>
-                            <button>Eliminar</button>
+                            <button class="text-xs">Eliminar</button>
                         </td>
                     </tr>
                     <tr>
                         <td>Educación</td>
                         <td>
-                            <button>Editar</button>
+                            <button class="text-xs">Editar</button>
                         </td>
                         <td>
-                            <button>Eliminar</button>
+                            <button class="text-xs">Eliminar</button>
                         </td>
                     </tr>
                     <tr>
                         <td>Transporte</td>
                         <td>
-                            <button>Editar</button>
+                            <button class="text-xs">Editar</button>
                         </td>
                         <td>
-                            <button>Eliminar</button>
+                            <button class="text-xs">Eliminar</button>
                         </td>
                     </tr>
                     <tr>
                         <td>Trabajo</td>
                         <td>
-                            <button>Editar</button>
+                            <button class="text-xs">Editar</button>
                         </td>
                         <td>
-                            <button>Eliminar</button>
+                            <button class="text-xs">Eliminar</button>
                         </td>
                     </tr>
                 </table>
             </article>
         </section>
         <!-- ----------REPORTS---------- -->
-        <section>
+        <section class="bg-neutral-700 w-10/12 my-6 mx-auto mt-14 p-3.5 rounded-md">
             <article>
                 <article>
-                    <h2>Reportes</h2>
+                    <h2 class="text-3xl font-bold m-3.5">Reportes</h2>
                 </article>
+            </article>
                 <!-- NO REPORTS -->
-                <article>
+                <article class="hidden">
                     <figure>
-                        <img src="" alt="">
+                        <img src="img/cellphone-5459707.svg" alt="reportes en celular">
                     </figure>
-                    <h3>Operaciones insuficientes</h3>
-                    <p>Prueba agregando más operaciones</p>
+                    <h3 class="text-center my-6">Operaciones insuficientes</h3>
+                    <p class="text-center my-6">Prueba agregando más operaciones</p>
                 </article>
                 <!-- WITH REPORTS -->
-                <article>
+                <article class="">
                     <article>
-                        <h3>Resumen</h3>
+                        <h3 class="text-2xl font-bold m-3.5">Resumen</h3>
                     </article>
                     <article>
-                        <table>
+                        <table class="w-full m-3.5 h-screen">
                             <tr>
-                                <td>Categoría con mayor ganancia</td>                            
+                                <td>Categoría con mayor ganancia</td> 
+                                <td></td>
+                                <td></td>                           
                             </tr>
                             <tr>
                                 <td>Categoría con mayor gasto</td>
@@ -293,10 +306,10 @@
                         </table>
                     </article>
                     <article>
-                       <h3>Totales por categorías</h3>
+                       <h3 class="text-2xl font-bold m-3.5">Totales por categorías</h3>
                     </article>
                     <article>
-                        <table>
+                        <table class="w-full m-3.5 h-screen">
                             <tr>
                                 <td>Categoría</td>
                                 <td>Ganancia</td>
@@ -306,10 +319,10 @@
                         </table>
                     </article>
                     <article>
-                       <h3>Totales por mes</h3>
+                       <h3 class="text-2xl font-bold m-3.5">Totales por mes</h3>
                     </article>
                     <article>
-                        <table>
+                        <table class="m-3.5 h-screen">
                             <tr>
                                 <td>Mes</td>
                                 <td>Ganancia</td>
