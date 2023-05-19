@@ -11,7 +11,7 @@
 
     <title>AhorrAdas</title>
 </head>
-<body class="bg-neutral-900 text-white">
+<body class="bg-neutral-900 text-white font-sans">
     <!-- ----------HEADER---------- -->
     <header class="bg-orange-700 lg:flex lg:flex-row lg:justify-between ">
         <article>
@@ -20,23 +20,23 @@
                     <i class="fa-solid fa-wallet text-4xl px-2"></i>
                     <h1 class="text-4xl font-sans">AhorrADAs</h1>
                 </div>
-                <div class="py-3.5 px-1.5 lg:hidden">
-                    <i class="fa-solid fa-ellipsis-vertical text-2xl"></i>
-                    <i class="fas fa-times p-2 hidden"></i>
+                <div class="py-3.5 px-1.5 lg:hidden" >
+                    <i class="fa-solid fa-ellipsis-vertical text-2xl px-2" id="btn-open-menu" ></i>
+                    <i class="fas fa-times p-2 hidden" id="btn-close-menu"></i>
                 </div>
             </nav>
         </article>
-        <article class="bg-neutral-700  h-36 py-2.5 px-1.5 lg:bg-orange-700 lg:h-full lg:p-8" >
-            <nav class=" flex flex-col lg:flex-row">
-                <a href="" class="py-2.5 px-1.5 font-sans ">
+        <article class="bg-neutral-700  h-36 py-2.5 px-1.5 hidden lg:block lg:bg-orange-700 lg:h-full lg:p-8" id="dropdown-menu">
+            <nav class="flex flex-col lg:flex-row">
+                <a href="index.html" class="py-2.5 px-1.5">
                     <i class="fa-solid fa-chart-simple "></i>
                     Balance
                 </a>
-                <a href="" class="py-2.5 px-1.5 font-sans ">
+                <a class="py-2.5 px-1.5 cursor-pointer" id="btn-categories">
                     <i class="fa-sharp fa-solid fa-tag "></i>
                     Categorías
                 </a>
-                <a href="" class="py-2.5 px-1.5 font-sans ">
+                <a class="py-2.5 px-1.5 cursor-pointer" id="btn-reports">
                     <i class="fa-solid fa-chart-pie "></i>
                     Reportes
                 </a>
@@ -48,39 +48,39 @@
         <section class="lg:flex lg:flex-row lg:justify-center">
             <section>
                <!-- ----------BALANCE---------- -->
-            <section class="bg-neutral-700 w-10/12 mx-auto mt-14 p-3.5 rounded-md lg:max-w-xs lg:max-h-max lg:mt-7">
+            <section class="bg-neutral-700 w-10/12 mx-auto mt-14 p-3.5 rounded-md lg:max-w-xs lg:max-h-max lg:mt-7" id="balance-section">
                 <article>
                     <article>
-                        <h2 class="text-3xl text-white font-bold m-3.5">Balance</h2>
+                        <h2 class="text-3xl font-bold m-3.5">Balance</h2>
                     </article>
                     <article class="flex justify-between">
                         <div class="m-3.5">
-                            <p class="text-white">Ganancias</p>
+                            <p>Ganancias</p>
                         </div>
                         <div class="m-3.5">
-                            <p class="text-white">+$0</p>
-                        </div>
-                    </article>
-                    <article class="flex justify-between">
-                        <div class="m-3.5">
-                            <p class="text-white">Gastos</p>
-                        </div>
-                        <div class="m-3.5">
-                            <p class="text-white">-$0</p>
+                            <p class="text-red-600">+$0</p>
                         </div>
                     </article>
                     <article class="flex justify-between">
                         <div class="m-3.5">
-                        <p class="text-white text-xl">Total</p> 
+                            <p>Gastos</p>
                         </div>
                         <div class="m-3.5">
-                            <p class="text-white">$0</p>
+                            <p class="text-green-600">-$0</p>
+                        </div>
+                    </article>
+                    <article class="flex justify-between">
+                        <div class="m-3.5">
+                        <p class="text-xl">Total</p> 
+                        </div>
+                        <div class="m-3.5">
+                            <p class=" font-bold">$0</p>
                         </div>
                     </article>
                 </article>
             </section>
             <!-- ----------FILTERS---------- -->
-            <section class="bg-neutral-700 w-10/12 mx-auto my-14 p-3.5 rounded-md lg:max-w-xs">
+            <section class="bg-neutral-700 w-10/12 mx-auto my-14 p-3.5 rounded-md lg:max-w-xs" id="filters-section">
                 <article class="flex justify-between">
                     <div>
                         <h2 class="text-3xl font-bold m-3.5">Filtros</h2>
@@ -130,14 +130,14 @@
                 </article>
             </section>
         </section>
-            <!-- ----------OPERATIONES---------- -->
-            <section class="bg-neutral-700 w-10/12 mx-auto my-14 p-3.5 rounded-md lg:max-w-2xl  lg:m-7">
+            <!-- ----------OPERATIONS---------- -->
+            <section class="bg-neutral-700 w-10/12 mx-auto my-14 p-3.5 rounded-md lg:max-w-2xl  lg:m-7" id="operations-section">
                <article class="md:flex md:flex-row md:justify-between">
                     <article>
                         <h2 class="text-3xl font-bold m-3.5">Operaciones</h2>
                     </article>
                     <article>
-                        <button class="bg-orange-700 m-3.5 p-3 rounded-md">+ Nueva operacion</button>
+                        <button class="bg-orange-700 m-3.5 p-3 rounded-md" id="btn-new-operation">+ Nueva operacion</button>
                     </article>
                 </article>
                 <!-- NO OPERATIONS -->
@@ -150,8 +150,30 @@
                 </article>
                <!-- WITH OPERATIONS -->
                <article>
-                <article>
+                <article class="flex sm:flex-wrap justify-around hidden">
+                    <article>
+                        <div class="px-14 py-10">wrg</div>
+                        <div class="px-14 py-10">sdfgb</div>
+                    </article>
+                   <article>
+                    <div class="px-14 py-10">sdb</div>
+                    <div class="px-14 py-10">
+                        <button class="text-xs pr-3">Editar</button>
+                        <button class="text-xs">Eliminar</button>
+                   </article>
+                    </div>
                 
+                </article>
+                <article class="hidden">
+                    <table>
+                        <tr>
+                            <td>Descripción</td>
+                            <td>Categoría</td>
+                            <td>Fecha</td>
+                            <td>Monto</td>
+                            <td>Acciones</td>
+                        </tr>
+                    </table>
                 </article>
     
                </article>
@@ -159,53 +181,55 @@
            </section>
     
         <!-- ------------NEW OPERATION--------------- -->
-        <section class="bg-neutral-700 w-10/12 mx-auto mt-14 p-3.5 rounded-md lg:max-w-3xl hidden">
+        <section class="bg-neutral-700 w-10/12 mx-auto my-14 p-3.5 rounded-md lg:max-w-3xl hidden" id="new-operation">
             <article>
                 <div>
                     <h2 class="text-3xl font-bold m-3.5">Nueva operación</h2>
                 </div>
             </article>
-            <article class="flex flex-col m-3.5">
-                <label for="" class="my-2.5">Descripción</label>
-                <input type="text" name="" id="" class="text-zinc-700 p-1.5 rounded">
-            </article>
-            <article class="flex flex-col m-3.5">
-                <label for="" class="my-2.5">Monto</label>
-                <input type="number" name="" id="" class="text-zinc-700 p-1.5 rounded">
-            </article>
-            <article class="flex flex-col m-3.5">
-                <label for="" class="my-2.5">Tipo</label>
-                <select name="" id="" class="text-zinc-700 p-1.5 rounded">
-                    <option value="">Gasto</option>
-                    <option value="">Ganancia</option>
-                </select>
-            </article>
-            <article class="flex flex-col m-3.5">
-                <label for="" class="my-2.5">Categoría</label>
-                <select name="" id="" class="text-zinc-700 p-1.5 rounded">
-                    <option value="">Comida</option>
-                    <option value="">Servicios</option>
-                    <option value="">Salidas</option>
-                    <option value="">Educación</option>
-                    <option value="">Transporte</option>
-                    <option value="">Trabajo</option> 
-                </select>
-            </article>
-            <article class="flex flex-col m-3.5">
-                <label for="" class="my-2.5">Desde</label>
-                <input type="date" name="" id="" class="text-zinc-700 p-1.5 rounded">
-            </article>
-            <article class="flex justify-end m-3.5">
-                <button class="py-2 px-3 mr-1.5 rounded-md">Cancelar</button>
-                <button class="bg-orange-700 py-2 px-4  rounded-md">Agregar</button>
-            </article>
-            <article class="overflow-x-scroll">
-                <table class="w-full m-3.5 ">
-                </table>
-            </article>
+            <form action="">
+                <article class="flex flex-col m-3.5">
+                    <label for="" class="my-2.5">Descripción</label>
+                    <input type="text" name="" id="" class="text-zinc-700 p-1.5 rounded">
+                </article>
+                <article class="flex flex-col m-3.5">
+                    <label for="" class="my-2.5">Monto</label>
+                    <input type="number" name="" id="" class="text-zinc-700 p-1.5 rounded">
+                </article>
+                <article class="flex flex-col m-3.5">
+                    <label for="" class="my-2.5">Tipo</label>
+                    <select name="" id="" class="text-zinc-700 p-1.5 rounded">
+                        <option value="">Gasto</option>
+                        <option value="">Ganancia</option>
+                    </select>
+                </article>
+                <article class="flex flex-col m-3.5">
+                    <label for="" class="my-2.5">Categoría</label>
+                    <select name="" id="" class="text-zinc-700 p-1.5 rounded">
+                        <option value="">Comida</option>
+                        <option value="">Servicios</option>
+                        <option value="">Salidas</option>
+                        <option value="">Educación</option>
+                        <option value="">Transporte</option>
+                        <option value="">Trabajo</option> 
+                    </select>
+                </article>
+                <article class="flex flex-col m-3.5">
+                    <label for="" class="my-2.5">Desde</label>
+                    <input type="date" name="" id="" class="text-zinc-700 p-1.5 rounded">
+                </article>
+                <article class="flex justify-end m-3.5">
+                    <button class="py-2 px-3 mr-1.5 rounded-md">Cancelar</button>
+                    <button class="bg-orange-700 py-2 px-4  rounded-md">Agregar</button>
+                </article>
+                <article class="overflow-x-scroll">
+                    <table class="w-full m-3.5 ">
+                    </table>
+                </article>
+            </form>
         </section>
         <!-- ----------CATEGORIES---------- -->
-        <section class="bg-neutral-700 w-10/12 mx-auto mt-14 p-3.5 rounded-md lg:max-w-3xl hidden">
+        <section class="bg-neutral-700 w-10/12 mx-auto my-14 p-3.5 rounded-md lg:max-w-3xl hidden" id="edit-categories">
             <article>
                 <h2 class="text-3xl font-bold m-3.5">Categorías</h2>
             </article>
@@ -217,66 +241,59 @@
                 </div>
             </article>
             <article>
-                <table class="w-full m-3.5 ">
+                <table class="w-11/12 m-3.5">
                     <tr>
-                        <td class="w-4/6 py-2 pr-8">Comida</td>
-                        <td class="w-1/6 py-2 pr-8">
-                            <button class="text-xs">Editar</button>
+                        <td class=" py-2 pr-8">Comida</td>
+                        <td class="flex flex-row py-2 px-8">
+                            <button class="text-xs p-3">Editar</button>
+                            <button class="text-xs p-3">Eliminar</button>
                         </td>
-                        <td class="w-1/6 py-2 pr-8">
-                            <button class="text-xs">Eliminar</button>
+                        
+                    </tr>
+                    <tr>
+                        <td class=" py-2 pr-8">Servicios</td>
+                        <td class="flex flex-row py-2 px-8">
+                            <button class="text-xs p-3">Editar</button>
+                            <button class="text-xs p-3">Eliminar</button>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td class=" py-4 pr-14">Salidas</td>
+                        <td class="flex flex-row py-2 px-8">
+                            <button class="text-xs p-3">Editar</button>
+                            <button class="text-xs p-3">Eliminar</button>
                         </td>
                     </tr>
                     <tr>
-                        <td class="w-4/6 py-2 pr-8">Servicios</td>
-                        <td class="w-1/6 py-2 pr-8">
-                            <button class="text-xs">Editar</button>
+                        <td class="py-2 pr-8">Educación</td>
+                        <td class="flex flex-row py-2 px-8">
+                            <button class="text-xs p-3">Editar</button>
+                            <button class="text-xs p-3">Eliminar</button>
                         </td>
-                        <td class="w-1/6 py-2 pr-8">
-                            <button class="text-xs">Eliminar</button>
-                        </td>
+                        
                     </tr>
                     <tr>
-                        <td class="w-4/6 py-2 pr-8">Salidas</td>
-                        <td class="w-1/6 py-2 pr-8">
-                            <button class="text-xs">Editar</button>
+                        <td class="py-2 pr-8">Transporte</td>
+                        <td class="flex flex-row py-2 px-8">
+                            <button class="text-xs p-3">Editar</button>
+                            <button class="text-xs p-3">Eliminar</button>
                         </td>
-                        <td class="w-1/6 py-2 pr-8">
-                            <button class="text-xs">Eliminar</button>
-                        </td>
+                       
                     </tr>
                     <tr>
-                        <td class="w-4/6 py-2 pr-8">Educación</td>
-                        <td class="w-1/6 py-2 pr-8">
-                            <button class="text-xs">Editar</button>
+                        <td class="py-2 pr-8">Trabajo</td>
+                        <td class="flex flex-row py-2 px-8">
+                            <button class="text-xs p-3">Editar</button>
+                            <button class="text-xs p-3">Eliminar</button>
                         </td>
-                        <td class="w-1/6 py-2 pr-8">
-                            <button class="text-xs">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="w-4/6 py-2 pr-8">Transporte</td>
-                        <td class="w-1/6 py-2 pr-8">
-                            <button class="text-xs">Editar</button>
-                        </td>
-                        <td class="w-1/6 py-2 pr-8">
-                            <button class="text-xs">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="w-4/6 py-2 pr-8">Trabajo</td>
-                        <td class="w-1/6 py-2 pr-8">
-                            <button class="text-xs">Editar</button>
-                        </td>
-                        <td class="w-1/6 py-2 pr-8">
-                            <button class="text-xs">Eliminar</button>
-                        </td>
+                        
                     </tr>
                 </table>
             </article>
         </section>
         <!-- ----------REPORTS---------- -->
-        <section class="bg-neutral-700 w-10/12 my-6 mx-auto mt-14 p-3.5 rounded-md lg:max-w-3xl hidden">
+        <section class="bg-neutral-700 w-10/12 my-6 mx-auto mt-14 p-3.5 rounded-md lg:max-w-3xl hidden" id="reports-section">
             <article>
                 <article>
                     <h2 class="text-3xl font-bold m-3.5">Reportes</h2>
@@ -291,7 +308,7 @@
                     <p class="text-center my-6">Prueba agregando más operaciones</p>
                 </article>
                 <!-- WITH REPORTS -->
-                <article class="">
+                <article class="hidden">
                     <article>
                         <h3 class="text-2xl font-bold m-3.5">Resumen</h3>
                     </article>
@@ -356,5 +373,8 @@
 
     </main>
     
+
+
+    <script src="js/app.js"></script>
 </body>
 </html>
