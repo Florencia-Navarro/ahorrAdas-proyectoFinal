@@ -17,11 +17,11 @@ const allCategories = getData("categorias")
 
 const renderCategories = (categories) => {
     cleanContainer("#categories-table")
-    for(const {id, nombre} of categories){
+    for(const category of categories){
         $("#categories-table").innerHTML += 
          `
         <tr>
-            <td class=" py-2 pr-8">${nombre}</td>
+            <td class=" py-2 pr-8">${category.nombre}</td>
             <td class="flex flex-row py-2 px-8">
                 <button class="text-xs p-3">Editar</button>
                 <button class="text-xs p-3">Eliminar</button>
@@ -49,7 +49,6 @@ const addCategory = () => {
 
 }
 
-console.log(allCategories)
 
 const operations = []
 
@@ -80,15 +79,16 @@ const categories = [
         }
     ]
     
+
 const calculations = []
 
 const initializeApp = () => {
 
-    sendData("categorias", allCategories)
+    sendData("categorias", categories)
     sendData("operaciones", operations)
     sendData("cuentas", calculations)
 
-    renderCategories(allCategories)
+    
 
     $("#btn-open-menu").addEventListener("click", () => {
         showElement("#btn-close-menu")
