@@ -28,15 +28,15 @@
         </article>
         <article class="bg-neutral-700  h-36 py-2.5 px-1.5 hidden lg:block lg:bg-orange-700 lg:h-full lg:p-8" id="dropdown-menu">
             <nav class="flex flex-col lg:flex-row">
-                <a href="index.html" class="py-2.5 px-1.5">
+                <a href="index.html" class="py-2.5 px-1.5 hover:bg-orange-800">
                     <i class="fa-solid fa-chart-simple "></i>
                     Balance
                 </a>
-                <a class="py-2.5 px-1.5 cursor-pointer" id="btn-categories">
+                <a class="py-2.5 px-1.5 cursor-pointer hover:bg-orange-800" id="btn-categories">
                     <i class="fa-sharp fa-solid fa-tag "></i>
                     Categorías
                 </a>
-                <a class="py-2.5 px-1.5 cursor-pointer" id="btn-reports">
+                <a class="py-2.5 px-1.5 cursor-pointer hover:bg-orange-800" id="btn-reports">
                     <i class="fa-solid fa-chart-pie "></i>
                     Reportes
                 </a>
@@ -86,10 +86,11 @@
                         <h2 class="text-3xl font-bold m-3.5">Filtros</h2>
                     </div>
                     <div>
-                        <button class="m-6">Ocultar filtros</button>
-                        <button class="hidden">Mostrar filtros</button>
+                        <button class="m-6 hover:text-neutral-800" id="btn-hide-filters">Ocultar filtros</button>
+                        <button class="m-6 hover:text-neutral-800 hidden" id="btn-show-filters">Mostrar filtros</button>
                     </div>
                 </article>
+                <article id="filters-container">
                     <article class="flex flex-col m-3.5">
                         <label for="" class="my-2.5">Tipo</label>
                         <select name="" id="" class="text-zinc-700 p-1.5 rounded">
@@ -125,7 +126,7 @@
                             <option value="">Z/A</option>
                         </select>
                     </article>
-                <article>
+                
     
                 </article>
             </section>
@@ -137,7 +138,7 @@
                         <h2 class="text-3xl font-bold m-3.5">Operaciones</h2>
                     </article>
                     <article>
-                        <button class="bg-orange-700 m-3.5 p-3 rounded-md" id="btn-new-operation">+ Nueva operacion</button>
+                        <button class="bg-orange-700 m-3.5 p-3 rounded-md hover:bg-orange-800" id="btn-new-operation">+ Nueva operacion</button>
                     </article>
                 </article>
                 <!-- NO OPERATIONS -->
@@ -233,16 +234,16 @@
             <article>
                 <h2 class="text-3xl font-bold m-3.5">Categorías</h2>
             </article>
-            <article class="m-3.5">
-                <label for="" class="my-2.5">Nombre</label>
+            <form class="m-3.5">
+                <label for="text" class="my-2.5">Nombre</label>
                 <div class="flex ">
-                    <input type="text" name="" id="" class="text-zinc-700 w-4/5 p-1.5 rounded">
-                    <button class="bg-orange-700 py-1 px-2 mx-1.5 rounded-md">Agregar</button>
+                    <input type="text" name="text" id="addCategory" class="text-zinc-700 w-4/5 p-1.5 rounded">
+                    <button class="bg-orange-700 py-1 px-2 mx-1.5 rounded-md  hover:bg-orange-800" id="btn-add-category">Agregar</button>
                 </div>
-            </article>
+            </form>
             <article>
-                <table class="w-11/12 m-3.5">
-                    <tr>
+                <table class="w-11/12 m-3.5" id="categories-table">
+                   <!--  <tr>
                         <td class=" py-2 pr-8">Comida</td>
                         <td class="flex flex-row py-2 px-8">
                             <button class="text-xs p-3">Editar</button>
@@ -288,7 +289,7 @@
                             <button class="text-xs p-3">Eliminar</button>
                         </td>
                         
-                    </tr>
+                    </tr> -->
                 </table>
             </article>
         </section>
