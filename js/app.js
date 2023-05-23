@@ -31,6 +31,42 @@ const renderCategories = (categories) => {
         `
     }
 }
+
+const renderOperations = (operations) => {
+    cleanContainer("#table-operation-cont")
+    $("#table-operation-cont").classList.add("w-full")
+    let tableOperations = `
+    <table class="w-full">
+        <thead>
+            <th>Descripción</th>
+            <th>Categoría</th>
+            <th>Fecha</th>
+            <th>Monto</th>
+            <th>Acciones</th>
+        </thead>
+    `
+    for(const {descripcion, monto, tipo, categoria, fecha} of operations){
+        tableOperations +=`
+           
+        <tr>
+            <td class=" py-2 px-8">${descripcion}</td>
+            <td class=" py-2 px-8">${categoria}</td>
+            <td class=" py-2 px-8">${fecha}</td>
+            <td class=" py-2 px-8">${monto}</td>
+            <td class="flex flex-row py-2 px-8">
+                <button class="text-xs p-3">Editar</button>
+                <button class="text-xs p-3">Eliminar</button>
+            </td>
+        </tr>
+        `
+    }
+    tableOperations +=` </table> `
+
+    $("#table-operation-cont").innerHTML = tableOperations
+}
+
+
+
 /* -----  ----- */
 
 const saveCategoryData = () => {
@@ -46,10 +82,37 @@ const addCategory = () => {
     currentCategories.push(newCategory)
     sendData("categorias", currentCategories)
     renderCategories(currentCategories)
+}
+
+/* const addData = (key, callback) => {
+    const currentData = getData(key)
+    const newData = callback
+    currentData.push(newData)
+    sendData(key, currentData)
+    render
+} */
+
+const saveOperationData = () => {
+    return{
+        id: randomId(),
+        descripcion: $("#description-input").value,
+        monto: $("#amount-input").valueAsNumber,
+        tipo: $("#expense-profit-select").value,
+        categoria: $("#category-select").value,
+        fecha: $("#date-select").value 
+    }
+}
+
+const addOperation = () => {
+    const currentOperations = getData("operaciones")
+    const newOperation = saveOperationData()
+    currentOperations.push(newOperation)
+    sendData("operaciones", currentOperations)
+    renderOperations(currentOperations)
 
 }
 
-console.log(allCategories)
+
 
 const operations = []
 
@@ -84,11 +147,11 @@ const calculations = []
 
 const initializeApp = () => {
 
-    sendData("categorias", allCategories)
+    sendData("categorias", categories)
     sendData("operaciones", operations)
     sendData("cuentas", calculations)
 
-    renderCategories(allCategories)
+    //renderCategories(allCategories)
 
     $("#btn-open-menu").addEventListener("click", () => {
         showElement("#btn-close-menu")
@@ -147,6 +210,17 @@ const initializeApp = () => {
     $("#btn-add-category").addEventListener("click", (e) => {
         e.preventDefault()
         addCategory()
+    })
+
+    $("#add-new-operation").addEventListener("click", (e) => {
+        e.preventDefault()
+        showElement("#balance-section")
+        showElement("#filters-section")
+        showElement("#operations-section")
+        showElement("#table-operation-cont")
+        hideElement("#new-operation")
+        hideElement("#no-operation-img")
+        addOperation()
     })
 
 }

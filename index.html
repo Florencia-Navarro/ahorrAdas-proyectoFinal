@@ -142,7 +142,7 @@
                     </article>
                 </article>
                 <!-- NO OPERATIONS -->
-                <article>
+                <article id="no-operation-img">
                     <figure class="m-3.5">
                         <img src="img/e-wallet-6368676.svg" alt="Billetera virtual">
                     </figure>
@@ -151,30 +151,24 @@
                 </article>
                <!-- WITH OPERATIONS -->
                <article>
-                <article class="flex sm:flex-wrap justify-around hidden">
+                <article class="flex sm:flex-wrap justify-around hidden" id="operation-container-mobile">
                     <article>
-                        <div class="px-14 py-10">wrg</div>
-                        <div class="px-14 py-10">sdfgb</div>
+                        <div class="px-14 py-10" id="description-operation">Descripción</div>
+                        <div class="px-14 py-10">Monto</div>
                     </article>
                    <article>
-                    <div class="px-14 py-10">sdb</div>
+                    <div class="px-14 py-10">Categoria</div>
                     <div class="px-14 py-10">
                         <button class="text-xs pr-3">Editar</button>
                         <button class="text-xs">Eliminar</button>
                    </article>
                     </div>
-                
+               
                 </article>
-                <article class="hidden">
-                    <table>
-                        <tr>
-                            <td>Descripción</td>
-                            <td>Categoría</td>
-                            <td>Fecha</td>
-                            <td>Monto</td>
-                            <td>Acciones</td>
-                        </tr>
-                    </table>
+
+                <!--  new operation table -->
+                <article class="hidden" id="table-operation-cont" >
+                    
                 </article>
     
                </article>
@@ -191,37 +185,37 @@
             <form action="">
                 <article class="flex flex-col m-3.5">
                     <label for="" class="my-2.5">Descripción</label>
-                    <input type="text" name="" id="" class="text-zinc-700 p-1.5 rounded">
+                    <input type="text" name="" id="description-input" class="text-zinc-700 p-1.5 rounded">
                 </article>
                 <article class="flex flex-col m-3.5">
                     <label for="" class="my-2.5">Monto</label>
-                    <input type="number" name="" id="" class="text-zinc-700 p-1.5 rounded">
+                    <input type="number" name="" id="amount-input" class="text-zinc-700 p-1.5 rounded">
                 </article>
                 <article class="flex flex-col m-3.5">
                     <label for="" class="my-2.5">Tipo</label>
-                    <select name="" id="" class="text-zinc-700 p-1.5 rounded">
-                        <option value="">Gasto</option>
-                        <option value="">Ganancia</option>
+                    <select name="" id="expense-profit-select" class="text-zinc-700 p-1.5 rounded">
+                        <option value="gasto" >Gasto</option>
+                        <option value="ganancia">Ganancia</option>
                     </select>
                 </article>
                 <article class="flex flex-col m-3.5">
                     <label for="" class="my-2.5">Categoría</label>
-                    <select name="" id="" class="text-zinc-700 p-1.5 rounded">
-                        <option value="">Comida</option>
-                        <option value="">Servicios</option>
-                        <option value="">Salidas</option>
-                        <option value="">Educación</option>
-                        <option value="">Transporte</option>
-                        <option value="">Trabajo</option> 
+                    <select name="" id="category-select" class="text-zinc-700 p-1.5 rounded">
+                        <option value="comida" >Comida</option>
+                        <option value="servicios">Servicios</option>
+                        <option value="salidas">Salidas</option>
+                        <option value="educación">Educación</option>
+                        <option value="transporte">Transporte</option>
+                        <option value="trabajo">Trabajo</option> 
                     </select>
                 </article>
                 <article class="flex flex-col m-3.5">
-                    <label for="" class="my-2.5">Desde</label>
-                    <input type="date" name="" id="" class="text-zinc-700 p-1.5 rounded">
+                    <label for="" class="my-2.5">Fecha</label>
+                    <input type="date" name="" id="date-select" class="text-zinc-700 p-1.5 rounded">
                 </article>
                 <article class="flex justify-end m-3.5">
                     <button class="py-2 px-3 mr-1.5 rounded-md">Cancelar</button>
-                    <button class="bg-orange-700 py-2 px-4  rounded-md">Agregar</button>
+                    <button class="bg-orange-700 py-2 px-4  rounded-md" id="add-new-operation" >Agregar</button>
                 </article>
                 <article class="overflow-x-scroll">
                     <table class="w-full m-3.5 ">
