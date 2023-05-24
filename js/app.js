@@ -11,18 +11,49 @@ const randomId = () => self.crypto.randomUUID()
 const getData = (key) => JSON.parse(localStorage.getItem(key))
 const sendData = (key, array) => localStorage.setItem(key, JSON.stringify(array))
 
-const allCategories = getData("categorias")
+const categories = [
+    {
+        id: randomId(),
+        nombre: "Comida"
+    },
+    {
+        id: randomId(),
+        nombre: "Servicios"
+    },
+    {
+        id: randomId(),
+        nombre: "Salidas"
+    },
+    {
+        id: randomId(),
+        nombre: "Educacion"
+    },
+    {
+        id: randomId(),
+        nombre: "Transporte"
+    },
+    {
+        id: randomId(),
+        nombre: "Trabajo"
+    }
+]
+
+const allCategories = getData("categorias") || categories
+const allOperations = getData("operaciones") || []
 
 /* ----- RENDER ----- */
 
 const renderCategories = (categories) => {
-    cleanContainer("#categories-table")
+    cleanContainer("#categories-table-cont")
+    $("#categories-table-cont").classList.add("w-full")
+    let tablecategories = `<table class="w-11/12 m-3.5>`
+
     for(const {id, nombre} of categories){
-        $("#categories-table").innerHTML += 
+        tablecategories += 
          `
         <tr>
-            <td class=" py-2 pr-8">${nombre}</td>
-            <td class="flex flex-row py-2 px-8">
+            <td class=" py-2 px-5">${nombre}</td>
+            <td class="flex flex-row py-2 px-2">
                 <button class="text-xs p-3">Editar</button>
                 <button class="text-xs p-3">Eliminar</button>
             </td>
@@ -30,6 +61,9 @@ const renderCategories = (categories) => {
         </tr>
         `
     }
+    tablecategories += `</table>`
+
+    $("#categories-table-cont").innerHTML = tablecategories
 }
 
 const renderOperations = (operations) => {
@@ -45,7 +79,10 @@ const renderOperations = (operations) => {
             <th>Acciones</th>
         </thead>
     `
-    for(const {descripcion, monto, tipo, categoria, fecha} of operations){
+    if(allOperations.length){
+        hideElement("#no-operation-img")
+    
+    for(const {id, descripcion, monto, categoria, fecha} of operations){
         tableOperations +=`
            
         <tr>
@@ -63,9 +100,10 @@ const renderOperations = (operations) => {
     tableOperations +=` </table> `
 
     $("#table-operation-cont").innerHTML = tableOperations
+}else{
+    showElement("#no-operation-img")
 }
-
-
+}
 
 /* -----  ----- */
 
@@ -114,44 +152,14 @@ const addOperation = () => {
 
 
 
-const operations = []
-
-const categories = [
-        {
-            id: randomId(),
-            nombre: "Comida"
-        },
-        {
-            id: randomId(),
-            nombre: "Servicios"
-        },
-        {
-            id: randomId(),
-            nombre: "Salidas"
-        },
-        {
-            id: randomId(),
-            nombre: "Educacion"
-        },
-        {
-            id: randomId(),
-            nombre: "Transporte"
-        },
-        {
-            id: randomId(),
-            nombre: "Trabajo"
-        }
-    ]
-    
-const calculations = []
-
 const initializeApp = () => {
 
-    sendData("categorias", categories)
-    sendData("operaciones", operations)
-    sendData("cuentas", calculations)
+    sendData("categorias", allCategories)
+    sendData("operaciones", allOperations)
+    sendData("cuentas", [])
 
-    //renderCategories(allCategories)
+    renderCategories(allCategories)
+    renderOperations(allOperations)
 
     $("#btn-open-menu").addEventListener("click", () => {
         showElement("#btn-close-menu")

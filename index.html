@@ -152,7 +152,7 @@
                <!-- WITH OPERATIONS -->
                <article>
                 <article class="flex sm:flex-wrap justify-around hidden" id="operation-container-mobile">
-                    <article>
+                    <!-- <article>
                         <div class="px-14 py-10" id="description-operation">Descripción</div>
                         <div class="px-14 py-10">Monto</div>
                     </article>
@@ -161,13 +161,13 @@
                     <div class="px-14 py-10">
                         <button class="text-xs pr-3">Editar</button>
                         <button class="text-xs">Eliminar</button>
-                   </article>
-                    </div>
+                    </div> 
+                   </article> -->
                
                 </article>
 
                 <!--  new operation table -->
-                <article class="hidden" id="table-operation-cont" >
+                <article class="overflow-x-scroll hidden" id="table-operation-cont" >
                     
                 </article>
     
@@ -217,13 +217,11 @@
                     <button class="py-2 px-3 mr-1.5 rounded-md">Cancelar</button>
                     <button class="bg-orange-700 py-2 px-4  rounded-md" id="add-new-operation" >Agregar</button>
                 </article>
-                <article class="overflow-x-scroll">
-                    <table class="w-full m-3.5 ">
-                    </table>
-                </article>
             </form>
         </section>
+
         <!-- ----------CATEGORIES---------- -->
+
         <section class="bg-neutral-700 w-10/12 mx-auto my-14 p-3.5 rounded-md lg:max-w-3xl hidden" id="edit-categories">
             <article>
                 <h2 class="text-3xl font-bold m-3.5">Categorías</h2>
@@ -235,108 +233,64 @@
                     <button class="bg-orange-700 py-1 px-2 mx-1.5 rounded-md  hover:bg-orange-800" id="btn-add-category">Agregar</button>
                 </div>
             </form>
-            <article>
-                <table class="w-11/12 m-3.5" id="categories-table">
-                   <!--  <tr>
-                        <td class=" py-2 pr-8">Comida</td>
-                        <td class="flex flex-row py-2 px-8">
-                            <button class="text-xs p-3">Editar</button>
-                            <button class="text-xs p-3">Eliminar</button>
-                        </td>
-                        
-                    </tr>
-                    <tr>
-                        <td class=" py-2 pr-8">Servicios</td>
-                        <td class="flex flex-row py-2 px-8">
-                            <button class="text-xs p-3">Editar</button>
-                            <button class="text-xs p-3">Eliminar</button>
-                        </td>
-                        
-                    </tr>
-                    <tr>
-                        <td class=" py-4 pr-14">Salidas</td>
-                        <td class="flex flex-row py-2 px-8">
-                            <button class="text-xs p-3">Editar</button>
-                            <button class="text-xs p-3">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 pr-8">Educación</td>
-                        <td class="flex flex-row py-2 px-8">
-                            <button class="text-xs p-3">Editar</button>
-                            <button class="text-xs p-3">Eliminar</button>
-                        </td>
-                        
-                    </tr>
-                    <tr>
-                        <td class="py-2 pr-8">Transporte</td>
-                        <td class="flex flex-row py-2 px-8">
-                            <button class="text-xs p-3">Editar</button>
-                            <button class="text-xs p-3">Eliminar</button>
-                        </td>
-                       
-                    </tr>
-                    <tr>
-                        <td class="py-2 pr-8">Trabajo</td>
-                        <td class="flex flex-row py-2 px-8">
-                            <button class="text-xs p-3">Editar</button>
-                            <button class="text-xs p-3">Eliminar</button>
-                        </td>
-                        
-                    </tr> -->
-                </table>
+            <article id="categories-table-cont">
+                
             </article>
         </section>
+
         <!-- ----------REPORTS---------- -->
+
         <section class="bg-neutral-700 w-10/12 my-6 mx-auto mt-14 p-3.5 rounded-md lg:max-w-3xl hidden" id="reports-section">
             <article>
                 <article>
                     <h2 class="text-3xl font-bold m-3.5">Reportes</h2>
                 </article>
             </article>
+
                 <!-- NO REPORTS -->
+
+            <article>
+                <figure>
+                    <img src="img/cellphone-5459707.svg" alt="reportes en celular">
+                </figure>
+                <h3 class="text-center my-6">Operaciones insuficientes</h3>
+                <p class="text-center my-6">Prueba agregando más operaciones</p>
+            </article>
+            <!-- WITH REPORTS -->
+            <article class="hidden">
                 <article>
-                    <figure>
-                        <img src="img/cellphone-5459707.svg" alt="reportes en celular">
-                    </figure>
-                    <h3 class="text-center my-6">Operaciones insuficientes</h3>
-                    <p class="text-center my-6">Prueba agregando más operaciones</p>
+                    <h3 class="text-2xl font-bold m-3.5">Resumen</h3>
                 </article>
-                <!-- WITH REPORTS -->
-                <article class="hidden">
-                    <article>
-                        <h3 class="text-2xl font-bold m-3.5">Resumen</h3>
-                    </article>
-                    <article class="">
-                        <table class="m-3.5 h-screen">
-                            <tr>
-                                <td class="w-2/4">Categoría con mayor ganancia</td> 
-                                <td class="w-1/4"></td>
-                                <td class="w-1/4"></td>                           
-                            </tr>
-                            <tr>
-                                <td class="w-2/4">Categoría con mayor gasto</td>
-                                <td class="w-1/4"></td>
-                                <td class="w-1/4"></td>
-                            </tr>
-                            <tr>
-                                <td class="w-2/4">Categoría con mayor balance</td>
-                                <td class="w-1/4"></td>
-                                <td class="w-1/4"></td>
-                            </tr>
-                            <tr>
-                                <td class="w-2/4">Mes con mayor ganancia</td>
-                                <td class="w-1/4"></td>
-                                <td class="w-1/4"></td>
-                            </tr>
-                            <tr>
-                                <td class="w-2/4">Mes con mayor gasto</td>
-                                <td class="w-1/4"></td>
-                                <td class="w-1/4"></td>
-                            </tr>
-                        </table>
-                    </article>
-                    <article>
+                <article class="">
+                    <table class="m-3.5 h-screen">
+                        <tr>
+                            <td class="w-2/4">Categoría con mayor ganancia</td> 
+                            <td class="w-1/4"></td>
+                            <td class="w-1/4"></td>                           
+                        </tr>
+                        <tr>
+                            <td class="w-2/4">Categoría con mayor gasto</td>
+                            <td class="w-1/4"></td>
+                            <td class="w-1/4"></td>
+                        </tr>
+                        <tr>
+                            <td class="w-2/4">Categoría con mayor balance</td>
+                            <td class="w-1/4"></td>
+                            <td class="w-1/4"></td>
+                        </tr>
+                        <tr>
+                            <td class="w-2/4">Mes con mayor ganancia</td>
+                            <td class="w-1/4"></td>
+                            <td class="w-1/4"></td>
+                        </tr>
+                        <tr>
+                            <td class="w-2/4">Mes con mayor gasto</td>
+                            <td class="w-1/4"></td>
+                            <td class="w-1/4"></td>
+                        </tr>
+                    </table>
+                </article>
+                <article>
                        <h3 class="text-2xl font-bold mx-3.5 mt-14">Totales por categorías</h3>
                     </article>
                     <article class="overflow-x-scroll">
