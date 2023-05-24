@@ -55,7 +55,7 @@ const renderCategories = (categories) => {
             <td class=" py-2 px-5">${nombre}</td>
             <td class="flex flex-row py-2 px-2">
                 <button class="text-xs p-3">Editar</button>
-                <button class="text-xs p-3">Eliminar</button>
+                <button class="text-xs p-3" onclick="deleteCategory('${id}')">Eliminar</button>
             </td>
                         
         </tr>
@@ -79,8 +79,8 @@ const renderOperations = (operations) => {
             <th>Acciones</th>
         </thead>
     `
-    if(allOperations.length){
-        hideElement("#no-operation-img")
+    //if(allOperations.length){
+    //    hideElement("#no-operation-img")
     
     for(const {id, descripcion, monto, categoria, fecha} of operations){
         tableOperations +=`
@@ -92,7 +92,7 @@ const renderOperations = (operations) => {
             <td class=" py-2 px-8">${monto}</td>
             <td class="flex flex-row py-2 px-8">
                 <button class="text-xs p-3">Editar</button>
-                <button class="text-xs p-3">Eliminar</button>
+                <button class="text-xs p-3" onclick="deleteOperation('${id}')">Eliminar</button>
             </td>
         </tr>
         `
@@ -100,9 +100,9 @@ const renderOperations = (operations) => {
     tableOperations +=` </table> `
 
     $("#table-operation-cont").innerHTML = tableOperations
-}else{
-    showElement("#no-operation-img")
-}
+//}else{
+//    showElement("#no-operation-img")
+//}
 }
 
 /* -----  ----- */
@@ -121,6 +121,7 @@ const addCategory = () => {
     sendData("categorias", currentCategories)
     renderCategories(currentCategories)
 }
+
 
 /* const addData = (key, callback) => {
     const currentData = getData(key)
@@ -148,6 +149,18 @@ const addOperation = () => {
     sendData("operaciones", currentOperations)
     renderOperations(currentOperations)
 
+}
+
+const deleteCategory = (id) => {
+    currentCategories = getData("categorias").filter(category => category.id !== id)
+    sendData("categorias", currentCategories)
+    renderCategories(currentCategories)
+}
+
+const deleteOperation = (id) => {
+    currentOperations = getData("operaciones").filter(operation => operation.id !== id)
+    sendData("operaciones", currentOperations)
+    renderOperations(currentOperations)
 }
 
 
