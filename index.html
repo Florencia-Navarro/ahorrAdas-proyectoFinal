@@ -179,7 +179,9 @@
         <section class="bg-neutral-700 w-10/12 mx-auto my-14 p-3.5 rounded-md lg:max-w-3xl hidden" id="new-operation">
             <article>
                 <div>
-                    <h2 class="text-3xl font-bold m-3.5">Nueva operación</h2>
+                    <h2 class="text-3xl font-bold m-3.5" id="new-operation-title">Nueva operación</h2>
+                    <h2 class="text-3xl font-bold m-3.5 hidden" id="edit-operation-title">Editar operación</h2>
+
                 </div>
             </article>
             <form action="">
@@ -213,10 +215,15 @@
                     <label for="" class="my-2.5">Fecha</label>
                     <input type="date" name="" id="date-select" class="text-zinc-700 p-1.5 rounded">
                 </article>
-                <article class="flex justify-end m-3.5">
-                    <button class="py-2 px-3 mr-1.5 rounded-md">Cancelar</button>
-                    <button class="bg-orange-700 py-2 px-4  rounded-md" id="add-new-operation" >Agregar</button>
+                <article class="flex justify-end m-3.5" id="btns-cancel-add-operation">
+                    <button class="py-2 px-3 mr-1.5 rounded-md hover:bg-neutral-500">Cancelar</button>
+                    <button class="bg-orange-700 py-2 px-4  rounded-md hover:bg-orange-800" id="add-new-operation" >Agregar</button>
                 </article>
+                <div class="flex flex-row justify-end mt-10 mx- 10 hidden" id="btns-cancel-edit-operation">
+                    <button class="bg-neutral-500 py-1 px-2 mx-1.5 rounded-md hover:bg-orange-800" id="btn-edit-cancel-operations">Cancelar</button>
+                    <button class="bg-orange-700 py-1 px-2 mx-1.5 rounded-md  hover:bg-orange-800" id="btn-edit-operation">Editar</button>
+                   
+                </div>
             </form>
         </section>
 
@@ -226,17 +233,25 @@
             <article>
                 <h2 class="text-3xl font-bold m-3.5">Categorías</h2>
             </article>
-            <form class="m-3.5">
+            <form class="m-3.5 flex flex-col">
                 <label for="text" class="my-2.5">Nombre</label>
                 <div class="flex ">
                     <input type="text" name="text" id="addCategory" class="text-zinc-700 w-4/5 p-1.5 rounded">
                     <button class="bg-orange-700 py-1 px-2 mx-1.5 rounded-md  hover:bg-orange-800" id="btn-add-category">Agregar</button>
                 </div>
+                <div class="flex flex-row justify-end mt-10 mx- 10 hidden" id="btns-cancel-edit-category">
+                    <button class="bg-neutral-500 py-1 px-2 mx-1.5 rounded-md hover:bg-orange-800" id="btn-edit-cancel-category">Cancelar</button>
+                    <button class="bg-orange-700 py-1 px-2 mx-1.5 rounded-md  hover:bg-orange-800" id="btn-edit-category">Editar</button>
+                   
+                </div>
             </form>
+            
             <article id="categories-table-cont">
                 
             </article>
         </section>
+
+
 
         <!-- ----------REPORTS---------- -->
 

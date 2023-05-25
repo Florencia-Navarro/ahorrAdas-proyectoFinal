@@ -54,7 +54,7 @@ const renderCategories = (categories) => {
         <tr>
             <td class=" py-2 px-5">${nombre}</td>
             <td class="flex flex-row py-2 px-2">
-                <button class="text-xs p-3">Editar</button>
+                <button class="text-xs p-3"onclick="editCategoryInput('${id}')">Editar</button>
                 <button class="text-xs p-3" onclick="deleteCategory('${id}')">Eliminar</button>
             </td>
                         
@@ -68,19 +68,20 @@ const renderCategories = (categories) => {
 
 const renderOperations = (operations) => {
     cleanContainer("#table-operation-cont")
+    
     $("#table-operation-cont").classList.add("w-full")
     let tableOperations = `
     <table class="w-full">
         <thead>
-            <th>Descripción</th>
-            <th>Categoría</th>
-            <th>Fecha</th>
+        <th>Descripción</th>
+        <th>Categoría</th>
+        <th>Fecha</th>
             <th>Monto</th>
             <th>Acciones</th>
         </thead>
     `
-    //if(allOperations.length){
-    //    hideElement("#no-operation-img")
+    if(getData("operaciones").length){
+        hideElement("#no-operation-img")
     
     for(const {id, descripcion, monto, categoria, fecha} of operations){
         tableOperations +=`
@@ -91,7 +92,7 @@ const renderOperations = (operations) => {
             <td class=" py-2 px-8">${fecha}</td>
             <td class=" py-2 px-8">${monto}</td>
             <td class="flex flex-row py-2 px-8">
-                <button class="text-xs p-3">Editar</button>
+                <button class="text-xs p-3" onclick="editOperationForm('${id}')">Editar</button>
                 <button class="text-xs p-3" onclick="deleteOperation('${id}')">Eliminar</button>
             </td>
         </tr>
@@ -100,16 +101,17 @@ const renderOperations = (operations) => {
     tableOperations +=` </table> `
 
     $("#table-operation-cont").innerHTML = tableOperations
-//}else{
-//    showElement("#no-operation-img")
-//}
+}else{
+    showElement("#no-operation-img")
 }
+}
+
 
 /* -----  ----- */
 
-const saveCategoryData = () => {
+const saveCategoryData = (categoryId) => {
     return{
-        id: randomId(),
+        id: categoryId ? categoryId : randomId(),
         nombre: $("#addCategory").value
     }
 }
@@ -123,17 +125,9 @@ const addCategory = () => {
 }
 
 
-/* const addData = (key, callback) => {
-    const currentData = getData(key)
-    const newData = callback
-    currentData.push(newData)
-    sendData(key, currentData)
-    render
-} */
-
-const saveOperationData = () => {
+const saveOperationData = (operationId) => {
     return{
-        id: randomId(),
+        id: operationId ? operationId : randomId(),
         descripcion: $("#description-input").value,
         monto: $("#amount-input").valueAsNumber,
         tipo: $("#expense-profit-select").value,
@@ -163,6 +157,64 @@ const deleteOperation = (id) => {
     renderOperations(currentOperations)
 }
 
+const editCategory = () => {
+    const categoryId = $("#btn-edit-category").getAttribute("data-id")
+    const editCategories = getData("categorias").map(category => {
+        if(category.id === categoryId){
+            return saveCategoryData()
+        }
+        return category
+    })
+    sendData("categorias", editCategories)
+}
+
+const editCategoryInput = (id) => {
+    hideElement("#balance-section")
+    hideElement("#filters-section")
+    hideElement("#operations-section")
+    hideElement("#btn-open-menu")
+    hideElement("#reports-section")
+    hideElement("#new-operation")
+    hideElement("#btn-add-category")
+    hideElement("#categories-table-cont")
+    showElement("#edit-categories")
+    showElement("#btn-close-menu")
+    showElement("#btns-cancel-edit-category")
+    $("#btn-edit-category").setAttribute("data-id", id)
+    const categorySelected = getData("categorias").find(category => category.id === id)
+    $("#addCategory").value = categorySelected.nombre
+
+}
+
+const editOperation = () => {
+    const operationId = $("#btn-edit-category").getAttribute("data-id")
+    const editOperations = getData("operaciones").map(operation => {
+        if(operation.id === operationId){
+            return saveOperationData()
+        }
+        return operation
+    })
+    sendData("operaciones", editOperations)
+}
+
+const editOperationForm = (id) => {
+    hideElement("#balance-section")
+    hideElement("#filters-section")
+    hideElement("#operations-section")
+    hideElement("#edit-categories")
+    hideElement("#new-operation-title")
+    hideElement("#btns-cancel-add-operation")
+    showElement("#new-operation")
+    showElement("#edit-operation-title")
+    showElement("#btns-cancel-edit-operation")
+    $("#btn-edit-operation").setAttribute("data-id", id)
+    const operationSelected = getData("operaciones").find(operation => operation.id === id)
+    $("#description-input").value = operationSelected.descripcion
+    $("#amount-input").valueAsNumber = operationSelected.monto
+    $("#expense-profit-select").value = operationSelected.tipo
+    $("#category-select").value = operationSelected.categoria
+    $("#date-select").value = operationSelected.fecha
+}
 
 
 const initializeApp = () => {
@@ -173,6 +225,7 @@ const initializeApp = () => {
 
     renderCategories(allCategories)
     renderOperations(allOperations)
+
 
     $("#btn-open-menu").addEventListener("click", () => {
         showElement("#btn-close-menu")
@@ -242,6 +295,26 @@ const initializeApp = () => {
         hideElement("#new-operation")
         hideElement("#no-operation-img")
         addOperation()
+    })
+
+    $("#btn-edit-category").addEventListener("click", (e) => {
+        e.preventDefault()
+        hideElement("#btn-edit-cancel-category")
+        hideElement("#btn-edit-category")
+        showElement("#categories-table-cont")
+        showElement("#btn-add-category")
+        editCategory()
+        renderCategories(getData("categorias"))
+    })
+
+    $("#btn-edit-operation").addEventListener("click", (e) => {
+        e.preventDefault()
+        hideElement("#new-operation")
+        showElement("#balance-section")
+        showElement("#filters-section")
+        showElement("#operations-section")
+        editOperation()
+        renderOperations(getData("operaciones"))
     })
 
 }
