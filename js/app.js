@@ -124,7 +124,17 @@ const renderProfitsAndExpenses = (operations) => {
     $("#total-balance").innerHTML = totalBalance
 }
 
-
+const renderCategoriesOptions = (categories) => {
+    cleanContainer("#categories-select")
+    for(const {id, nombre} of categories){
+        $("#categories-select").innerHTML += `
+        <option value="${id}">${nombre}</option>
+        `
+        $("#category-select").innerHTML += `
+        <option value="${id}">${nombre}</option>
+        `
+    }
+}
 
 /* -----  ----- */
 
@@ -248,6 +258,7 @@ const initializeApp = () => {
     renderCategories(allCategories)
     renderOperations(allOperations)
     renderProfitsAndExpenses(allOperations)
+    renderCategoriesOptions(allCategories)
 
 
     const operationsFromLocalStorage = getData("operaciones")
@@ -330,8 +341,9 @@ const initializeApp = () => {
         hideElement("#new-operation")
         hideElement("#no-operation-img")
         addOperation()
-        renderOperations(getData("operaciones"))
-        renderProfitsAndExpenses(getData("operaciones"))
+        const currentOperations = getData("operaciones")
+        renderOperations(currentOperations)
+        renderProfitsAndExpenses(currentOperations)
     })
 
     $("#btn-edit-category").addEventListener("click", (e) => {
@@ -369,8 +381,34 @@ const initializeApp = () => {
         showElement("#operations-section")
         hideElement("#new-operation")
     });
-    
 
+    /* ------FILTERS------ */
+
+    $("#exp-prof-filter").addEventListener("input", (e) => {
+        const typeSelected = e.target.value
+        const currentOperations = getData("operaciones")
+        if (typeSelected === "gasto"){
+            const filteredOperations = currentOperations.filter(operation => operation.tipo === "gasto")
+            renderOperations(filteredOperations)
+        }else{
+            const filteredOperations = currentOperations.filter(operation => operation.tipo === "ganancia")
+            renderOperations(filteredOperations)
+
+        }
+        
+    })
+    
+    $("#categories-select").addEventListener("input", (e) => {
+        const categoryId = e.target.value
+        const currentOperations = getData("operaciones")
+        if(categoryId === ""){
+            renderOperations(currentOperations)
+        }else{
+            const filteredOperations = currentOperations.filter(operation => operation.categoria === categoryId)
+            renderOperations(filteredOperations)
+            //console.log(filteredOperations)
+        }
+    })
 }
 
 window.addEventListener("load", initializeApp)
