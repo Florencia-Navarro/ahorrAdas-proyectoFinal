@@ -106,6 +106,25 @@ const renderOperations = (operations) => {
 }
 }
 
+const renderProfitsAndExpenses = (operations) => {
+    let profits = 0
+    let expenses = 0
+
+    for( const {tipo, monto} of operations){
+        if(tipo === "ganancia"){
+            profits += monto
+            $("#profits").innerHTML = profits
+        }else{
+            expenses += monto
+            $("#expenses").innerHTML = expenses
+        }
+    } 
+    
+    let totalBalance = profits - expenses
+    $("#total-balance").innerHTML = totalBalance
+}
+
+
 
 /* -----  ----- */
 
@@ -228,6 +247,8 @@ const initializeApp = () => {
 
     renderCategories(allCategories)
     renderOperations(allOperations)
+    renderProfitsAndExpenses(allOperations)
+
 
     const operationsFromLocalStorage = getData("operaciones")
 
@@ -310,6 +331,7 @@ const initializeApp = () => {
         hideElement("#no-operation-img")
         addOperation()
         renderOperations(getData("operaciones"))
+        renderProfitsAndExpenses(getData("operaciones"))
     })
 
     $("#btn-edit-category").addEventListener("click", (e) => {
