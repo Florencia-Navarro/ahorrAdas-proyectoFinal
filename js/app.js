@@ -121,7 +121,7 @@ const addCategory = () => {
     const newCategory = saveCategoryData()
     currentCategories.push(newCategory)
     sendData("categorias", currentCategories)
-    renderCategories(currentCategories)
+    //renderCategories(currentCategories)
 }
 
 
@@ -141,7 +141,7 @@ const addOperation = () => {
     const newOperation = saveOperationData()
     currentOperations.push(newOperation)
     sendData("operaciones", currentOperations)
-    renderOperations(currentOperations)
+    //renderOperations(currentOperations)
 
 }
 
@@ -187,14 +187,17 @@ const editCategoryInput = (id) => {
 }
 
 const editOperation = () => {
-    const operationId = $("#btn-edit-category").getAttribute("data-id")
+    const operationid =$("#btn-edit-operation").getAttribute("data-id")
+    console.log(operationid)
     const editOperations = getData("operaciones").map(operation => {
-        if(operation.id === operationId){
-            return saveOperationData()
+        if(operation.id === operationid){
+            return saveOperationData(operationid)
         }
         return operation
     })
     sendData("operaciones", editOperations)
+    //renderOperations(editOperations)
+    console.log(editOperations)
 }
 
 const editOperationForm = (id) => {
@@ -226,6 +229,16 @@ const initializeApp = () => {
     renderCategories(allCategories)
     renderOperations(allOperations)
 
+    const operationsFromLocalStorage = getData("operaciones")
+
+    if (operationsFromLocalStorage.length > 0) {
+        renderOperations(operationsFromLocalStorage)
+        showElement("#table-operation-cont")
+        hideElement("#no-operation-img")
+      } else {
+        hideElement("#table-operation-cont")
+        showElement("#no-operation-img")
+      }
 
     $("#btn-open-menu").addEventListener("click", () => {
         showElement("#btn-close-menu")
@@ -284,6 +297,7 @@ const initializeApp = () => {
     $("#btn-add-category").addEventListener("click", (e) => {
         e.preventDefault()
         addCategory()
+        renderCategories(getData("categorias"))
     })
 
     $("#add-new-operation").addEventListener("click", (e) => {
@@ -295,6 +309,7 @@ const initializeApp = () => {
         hideElement("#new-operation")
         hideElement("#no-operation-img")
         addOperation()
+        renderOperations(getData("operaciones"))
     })
 
     $("#btn-edit-category").addEventListener("click", (e) => {
@@ -316,6 +331,23 @@ const initializeApp = () => {
         editOperation()
         renderOperations(getData("operaciones"))
     })
+
+    $("#btns-cancel-add-operation").addEventListener("click", (e) => {
+        e.preventDefault()
+        showElement("#balance-section")
+        showElement("#filters-section")
+        showElement("#operations-section")
+        hideElement("#new-operation")
+    })
+
+    $("#btn-edit-cancel-operations").addEventListener("click", (e) => {
+        e.preventDefault()
+        showElement("#balance-section")
+        showElement("#filters-section")
+        showElement("#operations-section")
+        hideElement("#new-operation")
+    });
+    
 
 }
 
