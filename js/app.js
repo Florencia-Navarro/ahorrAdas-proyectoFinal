@@ -106,6 +106,35 @@ const renderOperations = (operations) => {
 }
 }
 
+const renderProfitsAndExpenses = (operations) => {
+    let profits = 0
+    let expenses = 0
+
+    for( const {tipo, monto} of operations){
+        if(tipo === "ganancia"){
+            profits += monto
+            $("#profits").innerHTML = profits
+        }else{
+            expenses += monto
+            $("#expenses").innerHTML = expenses
+        }
+    } 
+    
+    let totalBalance = profits - expenses
+    $("#total-balance").innerHTML = totalBalance
+}
+
+const renderCategoriesOptions = (categories) => {
+    cleanContainer("#categories-select")
+    for(const {id, nombre} of categories){
+        $("#categories-select").innerHTML += `
+        <option value="${id}">${nombre}</option>
+        `
+        $("#category-select").innerHTML += `
+        <option value="${id}">${nombre}</option>
+        `
+    }
+}
 
 /* -----  ----- */
 
@@ -155,6 +184,8 @@ const deleteOperation = (id) => {
     currentOperations = getData("operaciones").filter(operation => operation.id !== id)
     sendData("operaciones", currentOperations)
     renderOperations(currentOperations)
+    renderProfitsAndExpenses(currentOperations)
+
 }
 
 const editCategory = () => {
@@ -228,6 +259,12 @@ const initializeApp = () => {
 
     renderCategories(allCategories)
     renderOperations(allOperations)
+    renderProfitsAndExpenses(allOperations)
+    renderCategoriesOptions(allCategories)
+
+    const currentDate = new Date()
+    $("#date-filter").innerHTML = `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`
+    //pregunta como hacer q renderice el dia
 
     const operationsFromLocalStorage = getData("operaciones")
 
@@ -309,7 +346,9 @@ const initializeApp = () => {
         hideElement("#new-operation")
         hideElement("#no-operation-img")
         addOperation()
-        renderOperations(getData("operaciones"))
+        const currentOperations = getData("operaciones")
+        renderOperations(currentOperations)
+        renderProfitsAndExpenses(currentOperations)
     })
 
     $("#btn-edit-category").addEventListener("click", (e) => {
@@ -329,7 +368,9 @@ const initializeApp = () => {
         showElement("#filters-section")
         showElement("#operations-section")
         editOperation()
-        renderOperations(getData("operaciones"))
+        const currentOperations = getData("operaciones")
+        renderOperations(currentOperations)
+        renderProfitsAndExpenses(currentOperations)
     })
 
     $("#btns-cancel-add-operation").addEventListener("click", (e) => {
@@ -347,8 +388,94 @@ const initializeApp = () => {
         showElement("#operations-section")
         hideElement("#new-operation")
     });
-    
 
+    /* ------FILTERS------ */
+
+    $("#exp-prof-filter").addEventListener("input", (e) => {
+        const typeSelected = e.target.value
+        const currentOperations = getData("operaciones")
+        if (typeSelected === "gasto"){
+            const filteredOperations = currentOperations.filter(operation => operation.tipo === "gasto")
+            renderOperations(filteredOperations)
+        }else{
+            const filteredOperations = currentOperations.filter(operation => operation.tipo === "ganancia")
+            renderOperations(filteredOperations)
+
+        }
+        
+    })
+    
+    $("#categories-select").addEventListener("input", (e) => {
+        const categoryId = e.target.value
+        const currentOperations = getData("operaciones")
+        if(categoryId === ""){
+            renderOperations(currentOperations)
+        }else{
+            const filteredOperations = currentOperations.filter(operation => operation.categoria === categoryId)
+            renderOperations(filteredOperations)
+            //console.log(filteredOperations)
+        }
+    })
+
+    $("#date-filter").addEventListener("change", (e) => {
+        const dateSelected = new Date(e.target.value)
+        const currentOperations = getData("operaciones")
+        const filteredOperations = currentOperations.filter(operation => new Date(operation.fecha) >= dateSelected)
+        renderOperations(filteredOperations)
+    })
+
+    $("#filters-to-sort").addEventListener("input", (e) => {
+        const optionSelected = e.target.value
+        //console.log(optionSelected)
+        const currentOperations = getData("operaciones")
+        if(optionSelected === "mas reciente"){
+            const filteredOperations = currentOperations.toSorted((a, b) => {
+                const firstDate = new Date(a.fecha)
+                const secondDate = new Date(b.fecha)
+                if (firstDate < secondDate) return 1
+                if (firstDate > secondDate) return -1
+                return 0
+            })
+          renderOperations(filteredOperations)
+        }  else if(optionSelected === "menos reciente"){
+            const filteredOperations = currentOperations.toSorted((a, b) => {
+                const firstDate = new Date(a.fecha)
+                const secondDate = new Date(b.fecha)
+                if (firstDate < secondDate) return -1
+                if (firstDate > secondDate) return 1
+                return 0
+            })
+            renderOperations(filteredOperations)
+        } else if(optionSelected === "mayor monto"){
+            const filteredOperations = currentOperations.toSorted((a, b) => {
+                if (a.monto < b.monto) return 1
+                if (a.monto > b.monto) return -1
+                return 0
+            })
+            renderOperations(filteredOperations)
+        }  else if(optionSelected === "menor monto"){
+            const filteredOperations = currentOperations.toSorted((a, b) => {
+                if (a.monto < b.monto) return -1
+                if (a.monto > b.monto) return 1
+                return 0
+            })
+            renderOperations(filteredOperations)
+        } else if(optionSelected === "a-z"){
+            const filteredOperations = currentOperations.toSorted((a, b) => {
+                if (a.descripcion < b.descripcion) return -1
+                if (a.descripcion > b.descripcion) return 1
+                return 0
+            })
+            renderOperations(filteredOperations)
+        } else {
+            const filteredOperations = currentOperations.toSorted((a, b) => {
+                if (a.descripcion < b.descripcion) return 1
+                if (a.descripcion > b.descripcion) return -1
+                return 0
+            })
+            renderOperations(filteredOperations)
+        }
+    })
 }
 
 window.addEventListener("load", initializeApp)
