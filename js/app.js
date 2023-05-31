@@ -136,6 +136,16 @@ const renderCategoriesOptions = (categories) => {
     }
 }
 
+const validateForm = () => {
+    const description = $("#description-input").value.trim()
+    if(description == ""){
+        showElement("#category-error")
+    } else{
+        hideElement("#category-error")
+    }
+    return description !== ""
+}
+
 /* -----  ----- */
 
 const saveCategoryData = (categoryId) => {
@@ -345,7 +355,9 @@ const initializeApp = () => {
         showElement("#table-operation-cont")
         hideElement("#new-operation")
         hideElement("#no-operation-img")
-        addOperation()
+        if(validateForm()){
+            addOperation()
+        }
         const currentOperations = getData("operaciones")
         renderOperations(currentOperations)
         renderProfitsAndExpenses(currentOperations)

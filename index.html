@@ -188,6 +188,7 @@
                 <article class="flex flex-col m-3.5">
                     <label for="" class="my-2.5">Descripción</label>
                     <input type="text" name="" id="description-input" class="text-zinc-700 p-1.5 rounded">
+                    <p class="text-xs text-red-500 hidden">*Campo obligatorio</p>
                 </article>
                 <article class="flex flex-col m-3.5">
                     <label for="" class="my-2.5">Monto</label>
@@ -239,6 +240,7 @@
                     <input type="text" name="text" id="addCategory" class="text-zinc-700 w-4/5 p-1.5 rounded">
                     <button class="bg-orange-700 py-1 px-2 mx-1.5 rounded-md  hover:bg-orange-800" id="btn-add-category">Agregar</button>
                 </div>
+                <p class="text-xs text-red-500 hidden" id="category-error">*Campo obligatorio</p>
                 <div class="flex flex-row justify-end mt-10 mx- 10 hidden" id="btns-cancel-edit-category">
                     <button class="bg-neutral-500 py-1 px-2 mx-1.5 rounded-md hover:bg-orange-800" id="btn-edit-cancel-category">Cancelar</button>
                     <button class="bg-orange-700 py-1 px-2 mx-1.5 rounded-md  hover:bg-orange-800" id="btn-edit-category">Editar</button>
