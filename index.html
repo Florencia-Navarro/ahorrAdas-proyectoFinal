@@ -103,12 +103,7 @@
                         <label for="" class="my-2.5">Categoría</label>
                         <select name="" id="categories-select" class="text-zinc-700 p-1.5 rounded">
                         <option value="">Todos</option>
-                            <!--<option value="">Comida</option>
-                            <option value="">Servicios</option>
-                            <option value="">Salidas</option>
-                            <option value="">Educación</option>
-                            <option value="">Transporte</option>
-                            <option value="">Trabajo</option> -->
+                            
                         </select>
                     </article>
                     <article class="flex flex-col m-3.5">
@@ -152,18 +147,7 @@
                <!-- WITH OPERATIONS -->
                <article>
                 <article class="flex sm:flex-wrap justify-around hidden" id="operation-container-mobile">
-                    <!-- <article>
-                        <div class="px-14 py-10" id="description-operation">Descripción</div>
-                        <div class="px-14 py-10">Monto</div>
-                    </article>
-                   <article>
-                    <div class="px-14 py-10">Categoria</div>
-                    <div class="px-14 py-10">
-                        <button class="text-xs pr-3">Editar</button>
-                        <button class="text-xs">Eliminar</button>
-                    </div> 
-                   </article> -->
-               
+                    
                 </article>
 
                 <!--  new operation table -->
@@ -187,7 +171,8 @@
             <form action="">
                 <article class="flex flex-col m-3.5">
                     <label for="" class="my-2.5">Descripción</label>
-                    <input type="text" name="" id="description-input" class="text-zinc-700 p-1.5 rounded">
+                    <input type="text" name="" id="description-operation-input" class="text-zinc-700 p-1.5 rounded">
+                    <p class="text-xs text-red-500 hidden" id="operation-error">*Campo obligatorio</p>
                 </article>
                 <article class="flex flex-col m-3.5">
                     <label for="" class="my-2.5">Monto</label>
@@ -203,12 +188,7 @@
                 <article class="flex flex-col m-3.5">
                     <label for="" class="my-2.5">Categoría</label>
                     <select name="" id="category-select" class="text-zinc-700 p-1.5 rounded">
-                        <!-- <option value="comida" >Comida</option>
-                        <option value="servicios">Servicios</option>
-                        <option value="salidas">Salidas</option>
-                        <option value="educación">Educación</option>
-                        <option value="transporte">Transporte</option>
-                        <option value="trabajo">Trabajo</option>  -->
+                        
                     </select>
                 </article>
                 <article class="flex flex-col m-3.5">
@@ -239,6 +219,7 @@
                     <input type="text" name="text" id="addCategory" class="text-zinc-700 w-4/5 p-1.5 rounded">
                     <button class="bg-orange-700 py-1 px-2 mx-1.5 rounded-md  hover:bg-orange-800" id="btn-add-category">Agregar</button>
                 </div>
+                <p class="text-xs text-red-500 hidden" id="category-error">*Campo obligatorio</p>
                 <div class="flex flex-row justify-end mt-10 mx- 10 hidden" id="btns-cancel-edit-category">
                     <button class="bg-neutral-500 py-1 px-2 mx-1.5 rounded-md hover:bg-orange-800" id="btn-edit-cancel-category">Cancelar</button>
                     <button class="bg-orange-700 py-1 px-2 mx-1.5 rounded-md  hover:bg-orange-800" id="btn-edit-category">Editar</button>
@@ -264,7 +245,7 @@
 
                 <!-- NO REPORTS -->
 
-            <article>
+            <article id="no-reports-summary">
                 <figure>
                     <img src="img/cellphone-5459707.svg" alt="reportes en celular">
                 </figure>
@@ -272,63 +253,68 @@
                 <p class="text-center my-6">Prueba agregando más operaciones</p>
             </article>
             <!-- WITH REPORTS -->
-            <article class="hidden">
+            <article class="hidden" id="reports-summary">
                 <article>
                     <h3 class="text-2xl font-bold m-3.5">Resumen</h3>
                 </article>
-                <article class="">
-                    <table class="m-3.5 h-screen">
+                <article class="" id="summary-container">
+                    <table class="w-full m-3.5 h-screen">
                         <tr>
-                            <td class="w-2/4">Categoría con mayor ganancia</td> 
-                            <td class="w-1/4"></td>
-                            <td class="w-1/4"></td>                           
+                            <td class="w-1/4">Categoría con mayor ganancia</td> 
+                            <td class="w-1/4 pl-4 text-orange-700 font-bold " id="highest-earning-category"></td>
+                            <td class="w-2/4 pl-4 " id="highest-earning-amount"></td>                           
                         </tr>
                         <tr>
                             <td class="w-2/4">Categoría con mayor gasto</td>
-                            <td class="w-1/4"></td>
-                            <td class="w-1/4"></td>
+                            <td class="w-1/4 pl-4 text-orange-700 font-bold" id="highest-spending-category"></td>
+                            <td class="w-2/4 pl-4 " id="highest-spending-amount"></td>
                         </tr>
                         <tr>
                             <td class="w-2/4">Categoría con mayor balance</td>
-                            <td class="w-1/4"></td>
-                            <td class="w-1/4"></td>
+                            <td class="w-1/4 w-1/4 pl-4 text-orange-500 font-bold" id="highest-balance-category"></td>
+                            <td class="w-1/4 pl-4" id="highest-balance"></td>
                         </tr>
                         <tr>
                             <td class="w-2/4">Mes con mayor ganancia</td>
-                            <td class="w-1/4"></td>
-                            <td class="w-1/4"></td>
+                            <td class="w-1/4 pl-4" id="month-highest-earning"></td>
+                            <td class="w-1/4 pl-4 bg-neutral-700" id="highest-earning-amount2"></td>
                         </tr>
                         <tr>
                             <td class="w-2/4">Mes con mayor gasto</td>
-                            <td class="w-1/4"></td>
-                            <td class="w-1/4"></td>
+                            <td class="w-1/4 pl-4" id="month-highest-spending"></td>
+                            <td class="w-1/4 pl-4" id="highest-spending-amount2"></td>
                         </tr>
                     </table>
                 </article>
                 <article>
                        <h3 class="text-2xl font-bold mx-3.5 mt-14">Totales por categorías</h3>
                     </article>
-                    <article class="overflow-x-scroll">
-                        <table class="w-full m-3.5 ">
-                            <tr>
-                                <td class="py-1 px-8">Categoría</td>
-                                <td class="py-1 px-8">Ganancia</td>
-                                <td class="py-1 px-8">Gasto</td>
-                                <td class="py-1 px-8">Balance</td>
-                            </tr>
-                        </table>
+                    <article class="overflow-x-scroll" id="total-by-category">
+                        <!-- <table class="w-full m-3.5 ">
+                            <thead>
+                                <tr>
+                                    <td class="py-1 px-8">Categoría</td>
+                                    <td class="py-1 px-8">Ganancia</td>
+                                    <td class="py-1 px-8">Gasto</td>
+                                    <td class="py-1 px-8">Balance</td>
+                                </tr>
+                            </thead>
+                            <tbody id="total-by-category">
+
+                            </tbody>
+                        </table> -->
                     </article>
                     <article>
                        <h3 class="text-2xl font-bold mx-3.5 mt-14">Totales por mes</h3>
                     </article>
-                    <article class="overflow-x-scroll mb-14">
-                        <table class="w-full m-3.5">
+                    <article class="overflow-x-scroll mb-14" id="total-by-month">
+                        <!-- <table class="w-full m-3.5">
                             <tr>
                                 <td class="py-1 px-8">Mes</td>
                                 <td class="py-1 px-8">Ganancia</td>
                                 <td class="py-1 px-8">Gasto</td>
                                 <td class="py-1 px-8">Balance</td>
-                            </tr>
+                            </tr> -->
                         </table>
                     </article>
                 </article>

@@ -48,11 +48,11 @@ const renderCategories = (categories) => {
     $("#categories-table-cont").classList.add("w-full")
     let tablecategories = `<table class="w-11/12 m-3.5>`
 
-    for(const {id, nombre} of categories){
+    for(const { id, nombre } of categories){
         tablecategories += 
          `
         <tr>
-            <td class=" py-2 px-5">${nombre}</td>
+            <td class=" py-2 px-5 text-orange-500">${nombre}</td>
             <td class="flex flex-row py-2 px-2">
                 <button class="text-xs p-3"onclick="editCategoryInput('${id}')">Editar</button>
                 <button class="text-xs p-3" onclick="deleteCategory('${id}')">Eliminar</button>
@@ -73,9 +73,9 @@ const renderOperations = (operations) => {
     let tableOperations = `
     <table class="w-full">
         <thead>
-        <th>Descripción</th>
-        <th>Categoría</th>
-        <th>Fecha</th>
+            <th>Descripción</th>
+            <th>Categoría</th>
+            <th>Fecha</th>
             <th>Monto</th>
             <th>Acciones</th>
         </thead>
@@ -83,12 +83,12 @@ const renderOperations = (operations) => {
     if(getData("operaciones").length){
         hideElement("#no-operation-img")
     
-    for(const {id, descripcion, monto, categoria, fecha} of operations){
+    for(const { id, descripcion, monto, categoria, fecha } of operations){
         tableOperations +=`
            
         <tr>
             <td class=" py-2 px-8">${descripcion}</td>
-            <td class=" py-2 px-8">${categoria}</td>
+            <td class=" py-2 px-8 text-orange-500">${categoria}</td>
             <td class=" py-2 px-8">${fecha}</td>
             <td class=" py-2 px-8">${monto}</td>
             <td class="flex flex-row py-2 px-8">
@@ -106,11 +106,12 @@ const renderOperations = (operations) => {
 }
 }
 
-const renderProfitsAndExpenses = (operations) => {
+const renderProfitsAndExpenses = () => {
+    const currentOperations = getData("operaciones")
     let profits = 0
     let expenses = 0
 
-    for( const {tipo, monto} of operations){
+    for( const { tipo, monto } of currentOperations){
         if(tipo === "ganancia"){
             profits += monto
             $("#profits").innerHTML = profits
@@ -126,15 +127,247 @@ const renderProfitsAndExpenses = (operations) => {
 
 const renderCategoriesOptions = (categories) => {
     cleanContainer("#categories-select")
-    for(const {id, nombre} of categories){
+    for(const { id, nombre } of categories){
         $("#categories-select").innerHTML += `
-        <option value="${id}">${nombre}</option>
+        <option  value="${nombre}">${nombre}</option>
         `
         $("#category-select").innerHTML += `
-        <option value="${id}">${nombre}</option>
+        <option  value="${nombre}">${nombre}</option>
         `
     }
 }
+
+const validateForm = (input, message) => {
+    const description = $(input).value.trim()
+    if(description == ""){
+        showElement(message)
+    } else{
+        hideElement(message)
+    }
+    return description !== ""
+}
+
+
+const renderHigherGain = () => {
+    const currentOperations = getData("operaciones")
+    const filteredOperations = currentOperations.filter( operation => operation.tipo === "ganancia")
+
+        const higherGain = filteredOperations.toSorted((a, b) => {
+            if (a.monto < b.monto) return 1
+            if (a.monto > b.monto) return -1
+            return 0
+        })
+        $("#highest-earning-category").innerHTML = higherGain[0].categoria
+        $("#highest-earning-amount").innerHTML = `+$${higherGain[0].monto}`
+        $("#highest-earning-amount").classList.add("text-green-600")
+        $("#month-highest-earning").innerHTML = higherGain[0].fecha
+        $("#highest-earning-amount2").innerHTML = `+$${higherGain[0].monto}`
+        $("#highest-earning-amount2").classList.add("text-green-600")
+}
+
+const renderHigherSpending = () => {
+    const currentOperations = getData("operaciones")
+    const filteredOperations = currentOperations.filter( operation => operation.tipo === "gasto")
+
+    const higherSpending = filteredOperations.toSorted((a, b) => {
+        if (a.monto < b.monto) return 1
+        if (a.monto > b.monto) return -1
+        return 0
+    })
+    $("#highest-spending-category").innerHTML = higherSpending[0].categoria
+    $("#highest-spending-amount").innerHTML = `-$${higherSpending[0].monto}`
+    $("#highest-spending-amount").classList.add("text-red-600")
+    $("#month-highest-spending").innerHTML = higherSpending[0].fecha
+    $("#highest-spending-amount2").innerHTML = `-$${higherSpending[0].monto}`
+    $("#highest-spending-amount2").classList.add("text-red-600")
+}
+
+const highestBalance = () => {
+    const currentOperations = getData("operaciones")
+    const resultsByCategory = {}
+
+    for(const operation of currentOperations){
+        const category = operation.categoria
+        const amount = operation.tipo === "ganancia" ? operation.monto : -operation.monto
+        if(!resultsByCategory[category]){
+            resultsByCategory[category] = amount
+        } else{
+            resultsByCategory[category] += amount
+        }
+    }
+
+    let highestBalanceCategory = ""
+    let highestBalanceValue = 0
+
+    for(const category in resultsByCategory){
+        const balance = resultsByCategory[category]
+        console.log(resultsByCategory)
+        console.log(resultsByCategory[category])
+
+        if(balance > highestBalanceValue) {
+            highestBalanceValue = balance
+            highestBalanceCategory = category
+            console.log(highestBalanceValue)
+        }
+        
+        
+        //return highestBalanceCategory
+    }
+    $("#highest-balance-category").innerHTML = highestBalanceCategory
+    console.log(highestBalanceCategory)
+    $("#highest-balance").innerHTML = highestBalanceValue
+    console.log(highestBalanceValue)
+
+
+}
+
+
+
+const totalBycategory = () => {
+    const currentCategories = getData("operaciones")
+    cleanContainer("#total-by-category")
+    const resultsByCategory = {}
+
+    for (const {categoria, tipo, monto} of currentCategories) {
+    const category = categoria
+    const amount = tipo === "ganancia" ? monto : -monto
+
+    if (!resultsByCategory[category]) {
+        resultsByCategory[category] = {
+          profit: tipo === "ganancia" ? monto : 0,
+          spent: tipo === "gasto" ? monto : 0
+        }
+      } else {
+        resultsByCategory[category].profit += tipo === "ganancia" ? monto : 0
+        resultsByCategory[category].spent += tipo === "gasto" ? monto : 0
+      }
+    
+      let totalBycategoryTable = `
+        <table class="w-full m-3.5 ">
+            <thead>
+                <tr>
+                    <th class="py-1 px-8">Categoría</th>
+                    <th class="py-1 px-8">Ganancia</th>
+                    <th class="py-1 px-8">Gasto</th>
+                    <th class="py-1 px-8">Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+      `
+      for (const category in resultsByCategory) {
+        const profitCategory = resultsByCategory[category].profit
+        const spentcategory = resultsByCategory[category].spent
+        const balance =  profitCategory - spentcategory
+  
+
+    totalBycategoryTable += `
+        <tr>
+        <td class="py-3 px-8 text-center text-orange-500">${category}</td>
+        <td class="py-3 px-8 text-center text-green-600">${profitCategory ? profitCategory : "+$0"}</td>
+        <td class="py-3 px-8 text-center text-red-600">${spentcategory ? spentcategory : "-$0"}</td>
+        <td class="py-3 px-8 text-center">${balance}</td>
+
+    `
+       
+    }
+    totalBycategoryTable += `</table>`
+    $("#total-by-category").innerHTML = totalBycategoryTable
+
+}
+}
+
+const totalByMonth = () => {
+    const currentOperations = getData("operaciones")
+    cleanContainer("#total-by-month")
+    const totalMonth = {}
+
+    for (const operation of currentOperations) {
+        const { fecha, monto, tipo } = operation
+        const month = `${new Date(fecha).getMonth() + 1}/${new Date(fecha).getFullYear()}`   
+
+        if (!totalMonth[month]) {
+            totalMonth[month] = { spent: 0, profit: 0, balance: 0 }
+      }
+
+      if (tipo === "gasto") {
+        totalMonth[month].spent += monto
+      } else if (tipo === "ganancia") {
+        totalMonth[month].profit += monto
+      }
+
+      totalMonth[month].balance =  totalMonth[month].profit -  totalMonth[month].spent
+  
+    }
+
+    let totalByMonthTable = `
+        <table class="w-full m-3.5 ">
+            <thead>
+                <tr>
+                    <th class="py-1 px-8">Mes</th>
+                    <th class="py-1 px-8">Ganancia</th>
+                    <th class="py-1 px-8">Gasto</th>
+                    <th class="py-1 px-8">Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+      `
+      for (const month in totalMonth) {
+        console.log(totalMonth)
+        console.log(totalMonth[month])
+        const profitMonth = totalMonth[month].profit
+        const spentMonth = totalMonth[month].spent
+        const balance =  profitMonth - spentMonth
+
+        totalByMonthTable += `
+        <tr>
+        <td class="py-3 px-8 text-center">${month}</td>
+        <td class="py-3 px-8 text-center text-green-600">${profitMonth ? profitMonth : "+$0"}</td>
+        <td class="py-3 px-8 text-center text-red-600">${spentMonth ? spentMonth : "-$0"}</td>
+        <td class="py-3 px-8 text-center">${balance}</td>
+        `
+    }
+    totalByMonthTable += `</table>`
+    $("#total-by-month").innerHTML = totalByMonthTable
+}
+  
+    
+
+    
+      /* let totalByMonthTable = `
+        <table class="w-full m-3.5 ">
+            <thead>
+                <tr>
+                    <th class="py-1 px-8">Mes</th>
+                    <th class="py-1 px-8">Ganancia</th>
+                    <th class="py-1 px-8">Gasto</th>
+                    <th class="py-1 px-8">Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+      `
+      for (const month in resultsByMonth) {
+        const profitMonth = resultsByMonth[date].profit
+        const spentcategory = resultsByMonth[date].spent
+        const balance =  profitMonth - spentcategory
+  
+
+        totalByMonthTable += `
+        <tr>
+        <td class="py-3 px-8 text-center text-orange-500">${date}</td>
+        <td class="py-3 px-8 text-center text-green-600">${profitMonth ? profitMonth : "+$0"}</td>
+        <td class="py-3 px-8 text-center text-red-600">${spentcategory ? spentcategory : "-$0"}</td>
+        <td class="py-3 px-8 text-center">${balance}</td>
+
+    `
+       
+    }
+    totalByMonthTable += `</table>`
+    $("#total-by-month").innerHTML = totalByMonthTable
+
+}
+ */
+  
+
 
 /* -----  ----- */
 
@@ -142,6 +375,17 @@ const saveCategoryData = (categoryId) => {
     return{
         id: categoryId ? categoryId : randomId(),
         nombre: $("#addCategory").value
+    }
+}
+
+const saveOperationData = (operationId) => {
+    return{
+        id: operationId ? operationId : randomId(),
+        descripcion: $("#description-operation-input").value,
+        monto: $("#amount-input").valueAsNumber,
+        tipo: $("#expense-profit-select").value,
+        categoria: $("#category-select").value,
+        fecha: $("#date-select").value 
     }
 }
 
@@ -153,24 +397,11 @@ const addCategory = () => {
     //renderCategories(currentCategories)
 }
 
-
-const saveOperationData = (operationId) => {
-    return{
-        id: operationId ? operationId : randomId(),
-        descripcion: $("#description-input").value,
-        monto: $("#amount-input").valueAsNumber,
-        tipo: $("#expense-profit-select").value,
-        categoria: $("#category-select").value,
-        fecha: $("#date-select").value 
-    }
-}
-
 const addOperation = () => {
     const currentOperations = getData("operaciones")
     const newOperation = saveOperationData()
     currentOperations.push(newOperation)
     sendData("operaciones", currentOperations)
-    //renderOperations(currentOperations)
 
 }
 
@@ -184,7 +415,8 @@ const deleteOperation = (id) => {
     currentOperations = getData("operaciones").filter(operation => operation.id !== id)
     sendData("operaciones", currentOperations)
     renderOperations(currentOperations)
-    renderProfitsAndExpenses(currentOperations)
+    renderProfitsAndExpenses()
+    
 
 }
 
@@ -219,7 +451,6 @@ const editCategoryInput = (id) => {
 
 const editOperation = () => {
     const operationid =$("#btn-edit-operation").getAttribute("data-id")
-    console.log(operationid)
     const editOperations = getData("operaciones").map(operation => {
         if(operation.id === operationid){
             return saveOperationData(operationid)
@@ -227,8 +458,7 @@ const editOperation = () => {
         return operation
     })
     sendData("operaciones", editOperations)
-    //renderOperations(editOperations)
-    console.log(editOperations)
+    renderProfitsAndExpenses()
 }
 
 const editOperationForm = (id) => {
@@ -243,7 +473,7 @@ const editOperationForm = (id) => {
     showElement("#btns-cancel-edit-operation")
     $("#btn-edit-operation").setAttribute("data-id", id)
     const operationSelected = getData("operaciones").find(operation => operation.id === id)
-    $("#description-input").value = operationSelected.descripcion
+    $("#description-operation-input").value = operationSelected.descripcion
     $("#amount-input").valueAsNumber = operationSelected.monto
     $("#expense-profit-select").value = operationSelected.tipo
     $("#category-select").value = operationSelected.categoria
@@ -262,11 +492,11 @@ const initializeApp = () => {
     renderProfitsAndExpenses(allOperations)
     renderCategoriesOptions(allCategories)
 
-    const currentDate = new Date()
-    $("#date-filter").innerHTML = `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`
-    //pregunta como hacer q renderice el dia
-
     const operationsFromLocalStorage = getData("operaciones")
+
+    
+
+    
 
     if (operationsFromLocalStorage.length > 0) {
         renderOperations(operationsFromLocalStorage)
@@ -276,6 +506,11 @@ const initializeApp = () => {
         hideElement("#table-operation-cont")
         showElement("#no-operation-img")
       }
+        
+      
+    const currentDate = new Date()
+    $("#date-filter").innerHTML = `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`
+    //pregunta como hacer q renderice el dia
 
     $("#btn-open-menu").addEventListener("click", () => {
         showElement("#btn-close-menu")
@@ -321,6 +556,18 @@ const initializeApp = () => {
         hideElement("#new-operation")
         showElement("#reports-section")
         showElement("#btn-close-menu")
+        if (operationsFromLocalStorage.length > 0) {
+            renderHigherGain()
+            renderHigherSpending()
+            totalBycategory()
+            highestBalance()
+            totalByMonth()
+            showElement("#reports-summary")
+            hideElement("#no-reports-summary")
+          } else {
+            hideElement("#reports-summary")
+            showElement("#no-reports-summary")
+          }
     })
     $("#btn-new-operation").addEventListener("click", () => {
         hideElement("#balance-section")
@@ -333,22 +580,30 @@ const initializeApp = () => {
 
     $("#btn-add-category").addEventListener("click", (e) => {
         e.preventDefault()
-        addCategory()
+        if(validateForm("#addCategory", "#category-error")){
+            addCategory()
+        }
         renderCategories(getData("categorias"))
+
     })
 
     $("#add-new-operation").addEventListener("click", (e) => {
         e.preventDefault()
+        if(validateForm("#description-operation-input", "#operation-error")){
+            addOperation()
         showElement("#balance-section")
         showElement("#filters-section")
         showElement("#operations-section")
         showElement("#table-operation-cont")
         hideElement("#new-operation")
         hideElement("#no-operation-img")
-        addOperation()
-        const currentOperations = getData("operaciones")
-        renderOperations(currentOperations)
+        
+        }
+            
+            const currentOperations = getData("operaciones")
+            renderOperations(currentOperations)
         renderProfitsAndExpenses(currentOperations)
+       
     })
 
     $("#btn-edit-category").addEventListener("click", (e) => {
@@ -413,7 +668,6 @@ const initializeApp = () => {
         }else{
             const filteredOperations = currentOperations.filter(operation => operation.categoria === categoryId)
             renderOperations(filteredOperations)
-            //console.log(filteredOperations)
         }
     })
 
@@ -426,7 +680,6 @@ const initializeApp = () => {
 
     $("#filters-to-sort").addEventListener("input", (e) => {
         const optionSelected = e.target.value
-        //console.log(optionSelected)
         const currentOperations = getData("operaciones")
         if(optionSelected === "mas reciente"){
             const filteredOperations = currentOperations.toSorted((a, b) => {
@@ -475,6 +728,13 @@ const initializeApp = () => {
             })
             renderOperations(filteredOperations)
         }
+
+        /* -----REPORTS----- */
+
+
+
+
+    /* ------------------ */
     })
 }
 
