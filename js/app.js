@@ -415,7 +415,7 @@ const deleteOperation = (id) => {
     currentOperations = getData("operaciones").filter(operation => operation.id !== id)
     sendData("operaciones", currentOperations)
     renderOperations(currentOperations)
-    renderProfitsAndExpenses()
+    renderProfitsAndExpenses(currentOperations)
     
 
 }
@@ -458,7 +458,7 @@ const editOperation = () => {
         return operation
     })
     sendData("operaciones", editOperations)
-    renderProfitsAndExpenses()
+    renderProfitsAndExpenses(getData("operaciones"))
 }
 
 const editOperationForm = (id) => {
@@ -507,9 +507,11 @@ const initializeApp = () => {
         showElement("#no-operation-img")
       }
         
-      
     const currentDate = new Date()
-    $("#date-filter").innerHTML = `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`
+    const formattedDate = currentDate.toISOString().split('T')[0]
+    $("#date-filter").value = formattedDate
+    $("#date-select").value = formattedDate
+
     //pregunta como hacer q renderice el dia
 
     $("#btn-open-menu").addEventListener("click", () => {
@@ -556,7 +558,7 @@ const initializeApp = () => {
         hideElement("#new-operation")
         showElement("#reports-section")
         showElement("#btn-close-menu")
-        if (operationsFromLocalStorage.length > 0) {
+        if (operationsFromLocalStorage) {
             renderHigherGain()
             renderHigherSpending()
             totalBycategory()
