@@ -114,14 +114,16 @@ const renderProfitsAndExpenses = () => {
     for ( const { tipo, monto } of currentOperations ){
         if ( tipo === "ganancia" ){
             profits += monto
-            $("#profits").innerHTML = profits
-        } else {
+            
+        } else if( tipo === "gasto" ){
             expenses += monto
             $("#expenses").innerHTML = expenses
         }
     } 
     
     let totalBalance = profits - expenses
+    $("#profits").innerHTML = profits
+    $("#expenses").innerHTML = expenses
     $("#total-balance").innerHTML = totalBalance
 }
 
@@ -424,6 +426,7 @@ const editOperationForm = (id) => {
     $("#expense-profit-select").value = operationSelected.tipo
     $("#category-select").value = operationSelected.categoria
     $("#date-select").value = operationSelected.fecha
+    
 }
 
 
@@ -542,10 +545,10 @@ const initializeApp = () => {
         hideElement("#new-operation")
         hideElement("#no-operation-img")
         
-        }
-        const currentOperations = getData("operaciones")
-        renderOperations(currentOperations)
-        renderProfitsAndExpenses(currentOperations)
+        } 
+        //const currentOperations = getData("operaciones")
+        renderOperations(getData("operaciones"))
+        renderProfitsAndExpenses(getData("operaciones"))
        
     })
 
